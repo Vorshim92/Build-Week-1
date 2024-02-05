@@ -1,7 +1,7 @@
 
  
-  const rateUs = document.getElementsByClassName("button");
-  rateUs[0].addEventListener("click", () => {
+  const rateUs = document.getElementById("but");
+  rateUs.addEventListener("click", () => {
     window.location.href = "feedback.html";
   });
 
