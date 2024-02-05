@@ -9,6 +9,9 @@
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="#" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap"
       rel="stylesheet"
@@ -26,6 +29,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="#" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/benchmark-page.css" />
 
     <!-- WEBPAGE_NAME -->
     <title>TITOLO</title>
@@ -36,60 +40,42 @@
       <div>
         <img src="./assets/img/epicode_logo.png" alt="" />
       </div>
-      <h1>
-        Welcome to
-        <span>your exam</span>
-      </h1>
+      <div class="time-container">
+        <div class="time">
+          <p>SECONDS</p>
+          <div class="seconds-remaining">16</div>
+          <p>REMAINING</p>
+        </div>
+      </div>
     </header>
     <!-- END_HEADER -->
 
     <!-- BEGIN_MAIN -->
     <main>
-      <div>
-        <h2>Instructions</h2>
+      <div class="question-container">
+        <h1 class="question-style">how can I create a <b>checkbox in html?</b></h1>
       </div>
-      <section>
-        <div class="description">
-          <p>
-            We don't expect most engineers to know the answers to all of these
-          </p>
-          <p>questions, so don't worry if you're unsure of a few of them.</p>
-        </div>
-        <div class="list">
-          <ul>
-            <li>
-              Each question is <span>timed</span> and can only be
-              <span>answered once.</span>
-            </li>
-            <li>
-              Changing browser tab or opening other windows will
-              <span>invalidate the question.</span>
-            </li>
-            <li>This exam will take approx. <span>0-5 minutes.</span></li>
-          </ul>
-        </div>
-      </section>
-      <div class="check-rule">
-        <div class="checkbox-div">
-          <label class="checkbox-wrapper">
-            <input type="checkbox" name="check" required />
-            <span class="checkmark"></span>
-          </label>
-          <p>I promise to answer myself without help from anyone</p>
-        </div>
-        <div class="checkbutton-div">
-          <button type="button">PROCEED</button>
-        </div>
+      <div class="answers-container">
+        <button class="answer">input type = "check"</button>
+        <button class="answer">input type = "check"</button>
+        <button class="answer">input type = "check"</button>
+        <button class="answer">input type = "check"</button>
       </div>
     </main>
     <!-- END_MAIN -->
 
     <!-- BEGIN_FOOTER -->
-    <footer></footer>
+    <footer>
+        <div class="question-counter-container">
+            <p>QUESTION</p>
+            <p class="question-number">4</p>
+            <p>/ 10</p>
+        </div>
+    </footer>
     <!-- END_FOOTER -->
 
     <!-- BEGIN_SCRIPT -->
-    <script src="./assets/js/index.js"></script>
+    <script src="./asset/js/index.js"></script>
     <!-- END_SCRIPT -->
   </body>
 </html>
