@@ -5,37 +5,137 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "", sans-serif;
 }
 
 body {
+  font-family: "Inter", sans-serif;
   background-image: url(../img/bg.jpg);
   background-size: cover;
   width: 100%;
-  padding: 5%;
+  padding-inline: 100px;
+  padding-block: 50px;
+  font-size: 2rem;
+  color: white;
 }
 /* UTILITY */
 
 /* HEADER */
 header {
-  margin-bottom: 100px;
+  margin-bottom: 25px;
 }
 header img {
-  width: 15%;
+  width: 10%;
+  margin-bottom: 55px;
+}
+header h1 {
+  color: white;
+
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  font-size: 8rem;
+}
+header h1 span {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  display: block;
+  margin-top: -65px;
 }
 
 /* MAIN */
 main {
   width: 80%;
 }
-main h1 {
-  color: white;
-  font-size: 5rem;
-  margin-bottom: 15px;
-}
 main h2 {
-  color: #cb2376;
-  font-size: 2rem;
+  color: #d20094;
+  font-size: 4rem;
   margin-bottom: 15px;
+  font-family: "Outfit", sans-serif;
 }
+section {
+  margin-bottom: 75px;
+}
+
+.description {
+  margin-bottom: 25px;
+}
+.list ul {
+  padding-left: 50px;
+}
+.list li {
+  padding-block: 2.5px;
+}
+.list li span {
+  font-weight: 700;
+}
+
+.check-rule {
+  width: 100%;
+}
+.checkbox-div {
+  display: inline-block;
+  width: 65%;
+}
+
+.checkbutton-div {
+  display: inline-block;
+  text-align: end;
+  width: 34%;
+}
+.checkbox-wrapper {
+  display: inline-block;
+  /* position: relative; */
+  /* padding-left: 35px; */
+  margin-bottom: 10px;
+  cursor: pointer;
+  /* font-size: 22px; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+}
+
+/* Nascondo il checkbox di base del browser */
+.checkbox-wrapper input {
+  display: none;
+
+  vertical-align: middle;
+}
+
+/* creo il mio checkbox */
+.checkbox-wrapper .checkmark {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border: 3px solid white;
+  vertical-align: middle;
+}
+
+.checkbox-wrapper:hover input ~ .checkmark {
+  background-color: #cccccc;
+}
+/* Quando l'input è selezionato, coloro il bordo dell'input */
+.checkbox-wrapper input:checked ~ .checkmark {
+  background-color: #d20094;
+}
+
+.check-rule p {
+  display: inline-block;
+  font-weight: 700;
+  padding-left: 10px;
+}
+
+.check-rule button {
+  background-color: #00ffff;
+  width: 16rem;
+  height: 4rem;
+  display: inline-block;
+  box-shadow: 0px 0px 25px 1px rgba(0, 242, 255, 0.545);
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  /* margin-left: 200px; */
+  cursor: pointer;
+}
+
 /* FOOTER */
