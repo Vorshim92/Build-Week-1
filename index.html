@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <!-- WEBPAGE_NAME -->
-    <title>TITOLO</title>
+    <title>WELCOME to EPICODE</title>
   </head>
   <body>
     <!-- BEGIN_HEADER -->
@@ -72,13 +72,13 @@
       <div class="check-rule">
         <div class="checkbox-div">
           <label class="checkbox-wrapper">
-            <input type="checkbox" name="check" required />
+            <input type="checkbox" name="check" id="checkboxId" />
             <span class="checkmark"></span>
           </label>
           <p>I promise to answer myself without help from anyone</p>
         </div>
         <div class="checkbutton-div">
-          <button type="button">PROCEED</button>
+          <button type="button" id="proceed-btn">PROCEED</button>
         </div>
       </div>
     </main>
@@ -89,7 +89,22 @@
     <!-- END_FOOTER -->
 
     <!-- BEGIN_SCRIPT -->
-    <script src="./assets/js/index.js"></script>
+    <script>
+      window.onload = function () {
+        const checkbox = document.getElementById("checkboxId");
+        const proceedButton = document.getElementById("proceed-btn");
+
+        proceedButton.disabled = true;
+
+        checkbox.addEventListener("change", function () {
+          proceedButton.disabled = !checkbox.checked;
+        });
+
+        proceedButton.addEventListener("click", function () {
+          window.location.href = "./benchmark-page.html";
+        });
+      };
+    </script>
     <!-- END_SCRIPT -->
   </body>
 </html>

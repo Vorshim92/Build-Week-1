@@ -1,99 +1,123 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  width: 100%;
+  padding: 5%;
+}
 /*-----------------HEADER----------------*/
-
-header .time-container{
-    width: 10%;
-    margin-left: auto;
-    color: white;
+header {
+  margin-bottom: 100px;
+}
+header img {
+  width: 15%;
+}
+header .time-container {
+  width: 10%;
+  margin-left: auto;
+  color: white;
 }
 
-header .time-container .time{
-    text-align: center;
-    line-height: 2.5rem;
+header .time-container .time {
+  text-align: center;
+  line-height: 2.5rem;
 }
 
-header .time-container .time p{
-    font-family: "Inter";
+header .time-container .time p {
+  font-family: "Inter";
 }
 
-header .time-container .time .seconds-remaining{
-    font-size: 400%;
+header .time-container .time .seconds-remaining {
+  font-size: 400%;
 }
-
 
 /*-----------------MAIN-----------------------*/
-
-
-main{
-    margin: auto;
+main {
+  margin: auto;
+  width: 80%;
 }
-
-
+main h1 {
+  color: white;
+  font-size: 5rem;
+  margin-bottom: 15px;
+}
+main h2 {
+  color: #cb2376;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
 /*--------------QUESTION-----------------*/
 
-
-main .question-container{
-    text-align: center;
-    width: 60%;
-    margin: auto;
+main .question-container {
+  text-align: center;
+  width: 60%;
+  margin: auto;
 }
 
-main .question-container .question-style{
-    font-family: "Outfit";
-    font-weight: 400;
+main .question-container .question-style {
+  font-family: "Outfit";
+  font-weight: 400;
 }
-
 
 /*-------------------ANSWERS--------------------*/
 
-
-main .answers-container{
-width: 60%;
-margin: auto;
-text-align: center;
-margin-top: 4rem;
-
+main .answers-container {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  margin-top: 4rem;
 }
 
-main .answers-container .answer{
-    
-    color:white;
-    font-family: "Inter";
-    font-weight: bold;
-    font-size: medium;
-    padding: 1.5rem 6rem;
-    border-radius: 50px;
-    margin-top: 1.5rem;
-    margin-right: 2rem;
-    cursor: pointer;
-    background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 74%, rgba(255, 255, 255, 1) 100%);
-    border: none;
-    background-color: rgba(255, 255, 255, 0.1);
+main .answers-container .answer {
+  border-color: aliceblue;
+  color: white;
+  width: 18rem;
+  height: 4rem;
+  margin: 25px;
+  /* border: none; */
+  border-radius: 10rem;
+  /* background-color: transparent; */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
 }
 
+main .answers-container .answer:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
 /*------------------FOOTER----------------*/
 
-footer{
-    width: 100%;
+footer {
+  width: 100%;
 }
 
-footer .question-counter-container{
-    width: 20%;
-    padding-top: 8rem;
-    text-align: center;
-    margin: auto;
-    color: white;
-    letter-spacing: 2px;
-    font-family: "Inter";
-    font-weight: 600;
-    font-size: larger;
+footer .question-counter-container {
+  width: 20%;
+  padding-top: 8rem;
+  text-align: center;
+  margin: auto;
+  color: white;
+  letter-spacing: 2px;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: larger;
 }
 
-footer .question-counter-container p{
-    display: inline-block;
+footer .question-counter-container p {
+  display: inline-block;
 }
 
-footer .question-counter-container p:last-child{
-    color: #D20094;
+footer .question-counter-container p:last-child {
+  color: #d20094;
 }
