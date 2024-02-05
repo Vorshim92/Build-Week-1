@@ -8,10 +8,34 @@
   font-family: "", sans-serif;
 }
 
+body {
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  width: 100%;
+  padding: 5%;
+}
 /* UTILITY */
 
 /* HEADER */
+header {
+  margin-bottom: 100px;
+}
+header img {
+  width: 15%;
+}
 
 /* MAIN */
-
+main {
+  width: 80%;
+}
+main h1 {
+  color: white;
+  font-size: 5rem;
+  margin-bottom: 15px;
+}
+main h2 {
+  color: #cb2376;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
 /* FOOTER */
