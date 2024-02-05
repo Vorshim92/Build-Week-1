@@ -1,0 +1,82 @@
+
+/* SFONDO E LOGO */
+body {
+    background-image: url(./img/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    width: 100%;
+    padding-inline: 100px;
+    padding-block: 50px;
+    font-size: 1rem;
+    font-family: "Outfit", sans-serif;
+}
+
+.logo-epicode img{ width: 15%;}
+
+
+
+
+/* TESTO */
+
+header{font-size: 16px;
+    color: #ffffff;
+}
+h2 {
+    
+    font-size: 16px;
+}
+h3 {
+   font-size: 16px;
+}
+
+.title {
+    margin-top: 120px;
+     font-size: 300%;
+     margin-bottom: 0;
+    text-align: center;
+ }
+
+.summary {text-align: center;}
+
+
+
+ p {
+     color: white;
+     font-size: 16px;
+    }
+
+    .container{width: 100%;}
+
+    .correct{display:inline-block;
+    width: 25%}
+    .wrong {
+       display: inline-block; width: 25%;
+        }
+    .inblock-circle {
+     display: inline-block; width :50%;
+ }
+.send{text-align: center;}
+.email{text-align: center;}
+
+/* BOTTONE */
+.border-button { align-self: center;
+    border: 2px solid #f7f7f7;
+    /* Colore del bordo */
+    padding: 10px 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 120%;
+    color: #ffffff;
+    /* Colore del testo */
+    background-color: transparent;
+    /* Sfondo trasparente */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+ .border-button:hover {
+     background-color: #ffffff00;
+     /* Colore di sfondo al passaggio del mouse */
+     color: #f1468d;
+     /* Colore del testo al passaggio del mouse */
+ }
