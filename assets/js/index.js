@@ -96,8 +96,6 @@ const questions = [
 
 let usedQuestion = [];
 const questionFromArray = () => {
-  // endOfQuestions();
-
   const h1Question = document.querySelector(".question-style");
 
   h1Question.innerText = "";
@@ -106,6 +104,7 @@ const questionFromArray = () => {
     randQuest = Math.floor(Math.random() * questions.length);
   } while (usedQuestion.includes(randQuest));
   usedQuestion.push(randQuest);
+
   h1Question.innerText = questions[randQuest].question;
   const buttons = document.querySelector(".answers-container");
   // ARRAY delle Risposte Totali, l'ultima è quella CORRETTA
@@ -121,7 +120,6 @@ const questionFromArray = () => {
 
   // parte della funzione che aggiunge randomicamente le risposte nei pulsanti
   const answers = document.querySelectorAll(".answers-container > button");
-  console.log(answers);
   let usedAnswer = [];
   let randAnswer;
   answers.forEach((button) => {
@@ -131,10 +129,11 @@ const questionFromArray = () => {
     usedAnswer.push(randAnswer);
     button.innerText = totalAnswers[randAnswer];
     if (randAnswer === totalAnswers.length - 1) {
-      button.id = "correct";
+      button.setAttribute("id", "correct");
     }
   });
-  console.log(usedAnswer);
+
+  console.log(usedQuestion);
 };
 
 let newChart;
@@ -182,7 +181,7 @@ function updateChart(chart, counter) {
 
 const init = () => {
   drawPieChart(60, 60);
-  let counter = 55;
+  let counter = 0;
   setInterval(() => {
     if (counter === 60) {
       counter = 0;
@@ -195,11 +194,11 @@ const init = () => {
   }, 1000);
 };
 
-// const endOfQuestions = () => {
-//   if (usedQuestion.length > 10) {
-//     window.location.href = "../../result-index.html";
-//   }
-// };
+const endOfQuestions = () => {
+  if (usedQuestion.length + 1 === 11) {
+    window.location.href = "../../result-index.html";
+  }
+};
 
 // const buttonClick = () => {
 //   const buttons = document.querySelectorAll(".answers-container > button");
