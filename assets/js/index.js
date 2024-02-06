@@ -93,8 +93,13 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+
+// variabili globali
 let correctAnswersContainer = 0;
 let usedQuestion = [];
+let newChart;
+let timeCounter = 0;
+
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
 
@@ -137,7 +142,6 @@ const questionFromArray = () => {
   console.log(correctAnswersContainer);
 };
 
-let newChart;
 function drawPieChart(value, maxValue) {
   const ctx = document.getElementById("countdown").getContext("2d");
   newChart = new Chart(ctx, {
@@ -174,30 +178,35 @@ function drawPieChart(value, maxValue) {
   });
 }
 
-function updateChart(chart, counter) {
-  chart.data.datasets[0].data[0] = counter;
-  chart.data.datasets[0].data[1] = 60 - counter;
+function updateChart(chart) {
+  chart.data.datasets[0].data[0] = timeCounter;
+  chart.data.datasets[0].data[1] = 60 - timeCounter;
   chart.update();
+  // Reimposta il contatore del grafico
 }
 
 const init = () => {
   drawPieChart(60, 60);
-  let counter = 0;
+  countdownTimer();
+  updateChart(newChart);
+};
+
+const countdownTimer = () => {
   setInterval(() => {
-    if (counter === 60) {
-      counter = 0;
+    timeCounter += 1;
+    console.log(timeCounter);
+    if (timeCounter === 60) {
       questionFromArray();
+      timeCounter = 0;
     }
-    counter = counter + 1;
-    updateChart(newChart, counter);
     let secondi = document.getElementById("seconds-remaining");
-    secondi.innerText = 60 - counter;
+    secondi.innerText = 60 - timeCounter;
   }, 1000);
 };
 
 const endOfQuestions = () => {
   if (usedQuestion.length === 10) {
-    window.location.href = "../../result-index.html";
+    resultPage(correctAnswersContainer);
   }
 };
 
@@ -213,6 +222,63 @@ const buttonClick = () => {
       }
     });
   });
+};
+
+const resultPage = function (correctAnswersContainer) {
+  const head = document.getElementById("newHead");
+  head.innerHTML = "";
+  head.innerHTML = `<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RESULT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Outfit:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./assets/css/style-result.css" />`;
+
+  const body = document.body;
+  body.innerHTML = "";
+  body.innerHTML = `<header>
+  <div class="logo-epicode">
+    <img src="./assets/img/epicode_logo.png" alt="logo-epicode" />
+  </div>
+  <h1 class="title">Results</h1>
+  <h2 class="summary">The summary of your answers:</h2>
+</header>
+<main>
+  <section class="container">
+    <div class="correct">
+      <h3 class="cor-wro">Correct</h3>
+      <h3 class="cor-wro percentuali">Percentuale</h3>
+      <p class="domande">questions</p>
+    </div>
+    <div class="inblock-circle">
+      <p class="send">
+        We'll send you the certificate<br />
+        in few minutes
+      </p>
+      <p class="send">
+        Check your email (including<br />
+        promotions/spam folder)
+      </p>
+    </div>
+    <div class="wrong">
+      <h3 class="cor-wro">Wrong</h3>
+      <h3 class="cor-wro percentuali">Percentuale</h3>
+      <p class="domande">questions</p>
+    </div>
+  </section>
+  <div class="button"><button class="border-button">RATE US</button></div>
+</main>
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
+"></script>
+    <script src="./assets/js/index.js"></script>`;
 };
 
 window.onload = function () {
