@@ -5,11 +5,7 @@ const questions = [
     difficulty: "easy",
     question: "What does CPU stand for?",
     correct_answer: "Central Processing Unit",
-    incorrect_answers: [
-      "Central Process Unit",
-      "Computer Personal Unit",
-      "Central Processor Unit",
-    ],
+    incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
   },
   {
     category: "Science: Computers",
@@ -32,8 +28,7 @@ const questions = [
     category: "Science: Computers",
     type: "boolean",
     difficulty: "easy",
-    question:
-      "Pointers were not used in the original C programming language; they were added later on in C++.",
+    question: "Pointers were not used in the original C programming language; they were added later on in C++.",
     correct_answer: "False",
     incorrect_answers: ["True"],
   },
@@ -41,8 +36,7 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "What is the most preferred image format used for logos in the Wikimedia database?",
+    question: "What is the most preferred image format used for logos in the Wikimedia database?",
     correct_answer: ".svg",
     incorrect_answers: [".png", ".jpeg", ".gif"],
   },
@@ -52,18 +46,13 @@ const questions = [
     difficulty: "easy",
     question: "In web design, what does CSS stand for?",
     correct_answer: "Cascading Style Sheet",
-    incorrect_answers: [
-      "Counter Strike: Source",
-      "Corrective Style Sheet",
-      "Computer Style Sheet",
-    ],
+    incorrect_answers: ["Counter Strike: Source", "Corrective Style Sheet", "Computer Style Sheet"],
   },
   {
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "What is the code name for the mobile operating system Android 7.0?",
+    question: "What is the code name for the mobile operating system Android 7.0?",
     correct_answer: "Nougat",
     incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
   },
@@ -87,8 +76,7 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "Which programming language shares its name with an island in Indonesia?",
+    question: "Which programming language shares its name with an island in Indonesia?",
     correct_answer: "Java",
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
@@ -113,9 +101,7 @@ const questionFromArray = () => {
   h1Question.innerText = questions[randQuest].question;
   const buttons = document.querySelector(".answers-container");
   // ARRAY delle Risposte Totali, l'ultima è quella CORRETTA
-  let totalAnswers = questions[randQuest].incorrect_answers.concat(
-    questions[randQuest].correct_answer
-  );
+  let totalAnswers = questions[randQuest].incorrect_answers.concat(questions[randQuest].correct_answer);
 
   // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali
   buttons.innerHTML = "";
@@ -140,6 +126,7 @@ const questionFromArray = () => {
   buttonClick();
   console.log(usedQuestion);
   console.log(correctAnswersContainer);
+  variableNumOfPage();
 };
 
 function drawPieChart(value, maxValue) {
@@ -224,6 +211,12 @@ const buttonClick = () => {
   });
 };
 
+// FUNZIONE PER IL NUMERO DI PAGINA/DOMANDA
+const variableNumOfPage = function () {
+  const numOfPageContainer = document.querySelector(`.question-number`);
+  numOfPageContainer.innerText = usedQuestion.length;
+};
+
 const resultPage = function (correctAnswersContainer) {
   const head = document.getElementById("newHead");
   head.innerHTML = "";
@@ -241,6 +234,14 @@ const resultPage = function (correctAnswersContainer) {
 
   <link rel="stylesheet" href="./assets/css/style-result.css" />`;
 
+  let percentuali = Math.round((correctAnswersContainer / usedQuestion.length) * 100 * 10) / 10;
+  let message = "";
+  if (percentuali >= 60) {
+    message = '<h5 class="cong">Congratulations!</h5><h5 class="pass">You passed the exam.</h5>';
+  } else {
+    message = `<h5 class="cong">You failed.</h5><h5 class="pass">Better luck next time!</h5>`;
+  }
+
   const body = document.body;
   body.innerHTML = "";
   body.innerHTML = `<header>
@@ -254,10 +255,11 @@ const resultPage = function (correctAnswersContainer) {
   <section class="container">
     <div class="correct">
       <h3 class="cor-wro">Correct</h3>
-      <h3 class="cor-wro percentuali">Percentuale</h3>
-      <p class="domande">questions</p>
+      <h3 class="cor-wro percentuali">${percentuali}%</h3>
+      <p class="domande">${correctAnswersContainer}/${usedQuestion.length} questions</p>
     </div>
     <div class="inblock-circle">
+    ${message}
       <p class="send">
         We'll send you the certificate<br />
         in few minutes
@@ -269,11 +271,11 @@ const resultPage = function (correctAnswersContainer) {
     </div>
     <div class="wrong">
       <h3 class="cor-wro">Wrong</h3>
-      <h3 class="cor-wro percentuali">Percentuale</h3>
-      <p class="domande">questions</p>
+      <h3 class="cor-wro percentuali">${100 - percentuali}%</h3>
+      <p class="domande"> ${usedQuestion.length - correctAnswersContainer}/${usedQuestion.length} questions</p>
     </div>
   </section>
-  <div class="button"><button class="border-button">RATE US</button></div>
+  <div id="but" class="button"><button class="border-button">RATE US</button></div>
 </main>
 <script src="
 https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
@@ -281,6 +283,12 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
     <script src="./assets/js/index.js"></script>`;
 };
 
+const rateUs = () => {
+  const btnRateUs = document.getElementById("but");
+  rateUs.addEventListener("click", () => {
+    window.location.href = "../../feedback.html";
+  });
+};
 window.onload = function () {
   questionFromArray();
   init();
