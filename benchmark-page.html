@@ -36,9 +36,12 @@
         <img src="./assets/img/epicode_logo.png" alt="" />
       </div>
       <div class="time-container">
+        <div class="c-countdown-wrapper">
+          <canvas id="countdown" width="200" height="200"></canvas>
+        </div>
         <div class="time">
           <p>SECONDS</p>
-          <div class="seconds-remaining">16</div>
+          <div id="seconds-remaining"></div>
           <p>REMAINING</p>
         </div>
       </div>
@@ -48,16 +51,9 @@
     <!-- BEGIN_MAIN -->
     <main>
       <div class="question-container">
-        <h1 class="question-style">
-          how can I create a <b>checkbox in html?</b>
-        </h1>
+        <h1 class="question-style"></h1>
       </div>
-      <div class="answers-container">
-        <button class="answer">input type = "check"</button>
-        <button class="answer">input type = "check"</button>
-        <button class="answer">input type = "check"</button>
-        <button class="answer">input type = "check"</button>
-      </div>
+      <div class="answers-container"></div>
     </main>
     <!-- END_MAIN -->
 
@@ -72,6 +68,9 @@
     <!-- END_FOOTER -->
 
     <!-- BEGIN_SCRIPT -->
+    <script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
+"></script>
     <script src="./assets/js/index.js"></script>
     <!-- END_SCRIPT -->
   </body>
