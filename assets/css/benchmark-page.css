@@ -26,15 +26,18 @@ header .time-container {
 }
 
 header .time-container .time {
+  font-size: 0.9rem;
+  bottom: 152px;
+  position: relative;
   text-align: center;
-  line-height: 2.5rem;
+  line-height: 2rem;
 }
 
 header .time-container .time p {
   font-family: "Inter";
 }
 
-header .time-container .time .seconds-remaining {
+#seconds-remaining {
   font-size: 400%;
 }
 
@@ -52,6 +55,12 @@ main h2 {
   color: #cb2376;
   font-size: 2rem;
   margin-bottom: 15px;
+}
+
+.c-countdown-wrapper {
+  max-width: 300px;
+  width: 100%;
+  margin: 20px auto;
 }
 /*--------------QUESTION-----------------*/
 
