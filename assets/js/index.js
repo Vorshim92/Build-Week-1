@@ -93,7 +93,7 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
-
+let correctAnswersContainer = 0;
 let usedQuestion = [];
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
@@ -132,8 +132,9 @@ const questionFromArray = () => {
       button.setAttribute("id", "correct");
     }
   });
-
+  buttonClick();
   console.log(usedQuestion);
+  console.log(correctAnswersContainer);
 };
 
 let newChart;
@@ -195,18 +196,24 @@ const init = () => {
 };
 
 const endOfQuestions = () => {
-  if (usedQuestion.length + 1 === 11) {
+  if (usedQuestion.length === 10) {
     window.location.href = "../../result-index.html";
   }
 };
 
-// const buttonClick = () => {
-//   const buttons = document.querySelectorAll(".answers-container > button");
-//   buttons.forEach((button) => {
-//     button.addEventListener("onclick", (e) => {});
-//      this.id === "correct"
-//   });
-// };
+const buttonClick = () => {
+  const buttons = document.querySelectorAll(".answers-container > button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      if (this.id === "correct") {
+        correctAnswersContainer++;
+        questionFromArray();
+      } else {
+        questionFromArray();
+      }
+    });
+  });
+};
 
 window.onload = function () {
   questionFromArray();
