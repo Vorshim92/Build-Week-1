@@ -154,8 +154,8 @@ function drawPieChart(value, maxValue) {
             return context.dataset.backgroundColor;
           },
           display: function (context) {
-            let dataset = context.dataset;
-            let value = dataset.data[context.dataIndex];
+            var dataset = context.dataset;
+            var value = dataset.data[context.dataIndex];
             return value > 0;
           },
           color: "white",
@@ -175,7 +175,6 @@ function updateChart(chart) {
 const init = () => {
   drawPieChart(60, 60);
   countdownTimer();
-  updateChart(newChart);
 };
 
 const countdownTimer = () => {
@@ -186,6 +185,7 @@ const countdownTimer = () => {
       questionFromArray();
       timeCounter = 0;
     }
+    updateChart(newChart);
     let secondi = document.getElementById("seconds-remaining");
     secondi.innerText = 60 - timeCounter;
   }, 1000);
