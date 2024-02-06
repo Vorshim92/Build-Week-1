@@ -94,7 +94,123 @@ const questions = [
   },
 ];
 
+let usedQuestion = [];
+const questionFromArray = () => {
+  const h1Question = document.querySelector(".question-style");
+
+  h1Question.innerText = "";
+  let randQuest;
+  do {
+    randQuest = Math.floor(Math.random() * questions.length);
+  } while (usedQuestion.includes(randQuest));
+  usedQuestion.push(randQuest);
+
+  h1Question.innerText = questions[randQuest].question;
+  const buttons = document.querySelector(".answers-container");
+  // ARRAY delle Risposte Totali, l'ultima è quella CORRETTA
+  let totalAnswers = questions[randQuest].incorrect_answers.concat(
+    questions[randQuest].correct_answer
+  );
+
+  // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali
+  buttons.innerHTML = "";
+  for (let i = 0; i < totalAnswers.length; i++) {
+    buttons.innerHTML += `<button class="answer"></button>`;
+  }
+
+  // parte della funzione che aggiunge randomicamente le risposte nei pulsanti
+  const answers = document.querySelectorAll(".answers-container > button");
+  let usedAnswer = [];
+  let randAnswer;
+  answers.forEach((button) => {
+    do {
+      randAnswer = Math.floor(Math.random() * totalAnswers.length);
+    } while (usedAnswer.includes(randAnswer));
+    usedAnswer.push(randAnswer);
+    button.innerText = totalAnswers[randAnswer];
+    if (randAnswer === totalAnswers.length - 1) {
+      button.setAttribute("id", "correct");
+    }
+  });
+
+  console.log(usedQuestion);
+};
+
+let newChart;
+function drawPieChart(value, maxValue) {
+  const ctx = document.getElementById("countdown").getContext("2d");
+  newChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      datasets: [
+        {
+          data: [value, maxValue - value],
+          backgroundColor: ["rgba(0, 255, 255, 1)", "rgba(151, 105, 156, 1)"],
+        },
+      ],
+    },
+    options: {
+      cutout: "75%",
+      borderWidth: 0,
+      hoverBorderWidth: 2,
+      tooltips: {
+        enabled: false,
+      },
+      plugins: {
+        datalabels: {
+          backgroundColor: function (context) {
+            return context.dataset.backgroundColor;
+          },
+          display: function (context) {
+            let dataset = context.dataset;
+            let value = dataset.data[context.dataIndex];
+            return value > 0;
+          },
+          color: "white",
+        },
+      },
+    },
+  });
+}
+
+function updateChart(chart, counter) {
+  chart.data.datasets[0].data[0] = counter;
+  chart.data.datasets[0].data[1] = 60 - counter;
+  chart.update();
+}
+
+const init = () => {
+  drawPieChart(60, 60);
+  let counter = 0;
+  setInterval(() => {
+    if (counter === 60) {
+      counter = 0;
+      questionFromArray();
+    }
+    counter = counter + 1;
+    updateChart(newChart, counter);
+    let secondi = document.getElementById("seconds-remaining");
+    secondi.innerText = 60 - counter;
+  }, 1000);
+};
+
+const endOfQuestions = () => {
+  if (usedQuestion.length + 1 === 11) {
+    window.location.href = "../../result-index.html";
+  }
+};
+
+// const buttonClick = () => {
+//   const buttons = document.querySelectorAll(".answers-container > button");
+//   buttons.forEach((button) => {
+//     button.addEventListener("onclick", (e) => {});
+//      this.id === "correct"
+//   });
+// };
+
 window.onload = function () {
+  questionFromArray();
+  init();
   // TIPS:
   // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
   // Per ogni domanda, crea un container e incorporale tutte all'interno.
