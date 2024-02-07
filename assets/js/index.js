@@ -284,8 +284,6 @@ const resultPage = function () {
       <p class="send">
         We'll send you the certificate<br />
         in few minutes
-      </p>
-      <p class="send">
         Check your email (including<br />
         promotions/spam folder)
       </p>
