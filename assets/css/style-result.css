@@ -7,51 +7,44 @@ body {
   width: 100%;
   padding-inline: 100px;
   padding-block: 50px;
-  font-size: 1rem;
-  font-family: "Outfit", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 main {
-  width: 80%;
+  width: 100%;
   text-align: center;
 }
 .logo-epicode img {
   width: 15%;
 }
 
-section {
-  margin-block: 3rem;
-}
-
 /* TESTO */
 
 header {
+  margin: auto;
   font-size: 16px;
   color: #ffffff;
   width: 80%;
+  line-height: 2rem;
+  margin-bottom: 3.5rem;
 }
 
 h2 {
   font-size: 16px;
 }
 
-h3 {
-  color: #ffffff;
-  font-size: 1.8rem;
-  font-weight: 500;
-}
-
 .title {
+  font-family: "Outfit", sans-serif;
   margin-top: 120px;
-  font-size: 300%;
+  font-size: 3.7rem;
+  font-weight: 700;
   margin-bottom: 0;
   text-align: center;
 }
 
 .summary {
   text-align: center;
-  font-size: large;
-  font-weight: 500;
-  color: #cdced6;
+  font-size: 1.7rem;
+  font-weight: 400;
 }
 
 .send {
@@ -64,41 +57,83 @@ p {
   font-size: 16px;
   color: #ffffff;
 }
+.cor-wro1 {
+  font-size: 4rem;
+  font-weight: 300;
+  color: white;
+}
 
+.cor-wro2 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* SECTION ELEMETS  */
 .container {
-  width: 100%;
-  text-align: center;
+  font-family: "Outfit", sans-serif;
+  margin: auto;
+  width: 80%;
+  display: flex;
 }
 
+/* START SECTION ELEMENT */
 .correct {
+  margin-block: auto;
+  margin-left: 7rem;
+  width: 33%;
   text-align: left;
-
-  display: inline-block;
-  width: 22%;
+  line-height: 1%;
+  margin-bottom: 6rem;
 }
 
-.wrong {
-  text-align: right;
-  display: inline-block;
-  width: 22%;
-}
-
+/* MIDDLE SECTION ELEMENT */
 .inblock-circle {
-  display: inline-block;
-  width: 50%;
+  width: auto;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+#chart {
+  max-width: 400px;
+  height: auto;
+}
+
+#inchart {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(25%, -25%);
+  z-index: 1;
+  /* display: none; */
+}
+
+/* END SECTION ELEMENT */
+.wrong {
+  margin-block: auto;
+  margin-right: 7rem;
+  width: 33%;
+  text-align: right;
+  line-height: 1%;
+  margin-bottom: 6rem;
 }
 
 .domande {
-  font-size: 0.8rem;
-  color: #3e4364;
+  font-size: 1.5rem;
+  color: #ffffffc7;
 }
 
 /* BOTTONE */
 .button {
-  text-align: center;
+  display: inline-block;
+  margin: 5rem auto;
 }
 
 .border-button {
+  width: 280px;
+  height: 80px;
   font-weight: 600;
   display: block;
   border: 2px solid #f7f7f7;
@@ -108,7 +143,7 @@ p {
 
   padding: 10px 50px;
   font-family: "Inter", sans-serif;
-  font-size: 120%;
+  font-size: 160%;
   color: #ffffff;
 
   /* Colore del testo */
