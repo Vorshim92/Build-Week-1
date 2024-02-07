@@ -5,11 +5,7 @@ const questions = [
     difficulty: "easy",
     question: "What does CPU stand for?",
     correct_answer: "Central Processing Unit",
-    incorrect_answers: [
-      "Central Process Unit",
-      "Computer Personal Unit",
-      "Central Processor Unit",
-    ],
+    incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
   },
   {
     category: "Science: Computers",
@@ -32,8 +28,7 @@ const questions = [
     category: "Science: Computers",
     type: "boolean",
     difficulty: "easy",
-    question:
-      "Pointers were not used in the original C programming language; they were added later on in C++.",
+    question: "Pointers were not used in the original C programming language; they were added later on in C++.",
     correct_answer: "False",
     incorrect_answers: ["True"],
   },
@@ -41,8 +36,7 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "What is the most preferred image format used for logos in the Wikimedia database?",
+    question: "What is the most preferred image format used for logos in the Wikimedia database?",
     correct_answer: ".svg",
     incorrect_answers: [".png", ".jpeg", ".gif"],
   },
@@ -52,18 +46,13 @@ const questions = [
     difficulty: "easy",
     question: "In web design, what does CSS stand for?",
     correct_answer: "Cascading Style Sheet",
-    incorrect_answers: [
-      "Counter Strike: Source",
-      "Corrective Style Sheet",
-      "Computer Style Sheet",
-    ],
+    incorrect_answers: ["Counter Strike: Source", "Corrective Style Sheet", "Computer Style Sheet"],
   },
   {
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "What is the code name for the mobile operating system Android 7.0?",
+    question: "What is the code name for the mobile operating system Android 7.0?",
     correct_answer: "Nougat",
     incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
   },
@@ -87,14 +76,18 @@ const questions = [
     category: "Science: Computers",
     type: "multiple",
     difficulty: "easy",
-    question:
-      "Which programming language shares its name with an island in Indonesia?",
+    question: "Which programming language shares its name with an island in Indonesia?",
     correct_answer: "Java",
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+
+// variabili globali
 let correctAnswersContainer = 0;
 let usedQuestion = [];
+let newChart;
+let timeCounter = 0;
+
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
 
@@ -108,9 +101,7 @@ const questionFromArray = () => {
   h1Question.innerText = questions[randQuest].question;
   const buttons = document.querySelector(".answers-container");
   // ARRAY delle Risposte Totali, l'ultima è quella CORRETTA
-  let totalAnswers = questions[randQuest].incorrect_answers.concat(
-    questions[randQuest].correct_answer
-  );
+  let totalAnswers = questions[randQuest].incorrect_answers.concat(questions[randQuest].correct_answer);
 
   // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali
   buttons.innerHTML = "";
@@ -133,11 +124,10 @@ const questionFromArray = () => {
     }
   });
   buttonClick();
-  console.log(usedQuestion);
   console.log(correctAnswersContainer);
+  variableNumOfPage();
 };
 
-let newChart;
 function drawPieChart(value, maxValue) {
   const ctx = document.getElementById("countdown").getContext("2d");
   newChart = new Chart(ctx, {
@@ -163,8 +153,8 @@ function drawPieChart(value, maxValue) {
             return context.dataset.backgroundColor;
           },
           display: function (context) {
-            let dataset = context.dataset;
-            let value = dataset.data[context.dataIndex];
+            var dataset = context.dataset;
+            var value = dataset.data[context.dataIndex];
             return value > 0;
           },
           color: "white",
@@ -174,30 +164,36 @@ function drawPieChart(value, maxValue) {
   });
 }
 
-function updateChart(chart, counter) {
-  chart.data.datasets[0].data[0] = counter;
-  chart.data.datasets[0].data[1] = 60 - counter;
+function updateChart(chart) {
+  chart.data.datasets[0].data[0] = timeCounter;
+  chart.data.datasets[0].data[1] = 60 - timeCounter;
   chart.update();
+  // Reimposta il contatore del grafico
 }
 
 const init = () => {
   drawPieChart(60, 60);
-  let counter = 0;
+  countdownTimer();
+};
+
+const countdownTimer = () => {
+  timeCounter = 0;
   setInterval(() => {
-    if (counter === 60) {
-      counter = 0;
+    timeCounter += 1;
+    // console.log(timeCounter);
+    if (timeCounter === 60) {
       questionFromArray();
+      timeCounter = 0;
     }
-    counter = counter + 1;
-    updateChart(newChart, counter);
+    updateChart(newChart);
     let secondi = document.getElementById("seconds-remaining");
-    secondi.innerText = 60 - counter;
+    secondi.innerText = 60 - timeCounter;
   }, 1000);
 };
 
 const endOfQuestions = () => {
   if (usedQuestion.length === 10) {
-    window.location.href = "../../result-index.html";
+    resultPage();
   }
 };
 
@@ -211,10 +207,90 @@ const buttonClick = () => {
       } else {
         questionFromArray();
       }
+      endOfQuestions();
     });
   });
 };
 
+// FUNZIONE PER IL NUMERO DI PAGINA/DOMANDA
+const variableNumOfPage = function () {
+  const numOfPageContainer = document.querySelector(`.question-number`);
+  numOfPageContainer.innerText = usedQuestion.length;
+};
+
+const resultPage = function () {
+  const head = document.getElementById("newHead");
+  head.innerHTML = "";
+  head.innerHTML = `<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RESULT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Outfit:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./assets/css/style-result.css" />`;
+
+  let percentuali = Math.round((correctAnswersContainer / usedQuestion.length) * 1000) / 10;
+  let message = "";
+  if (percentuali >= 60) {
+    message = '<h5 class="cong">Congratulations!</h5><h5 class="pass">You passed the exam.</h5>';
+  } else {
+    message = `<h5 class="cong">You failed.</h5><h5 class="pass">Better luck next time!</h5>`;
+  }
+
+  const body = document.body;
+  body.innerHTML = "";
+  body.innerHTML = `<header>
+  <div class="logo-epicode">
+    <img src="./assets/img/epicode_logo.png" alt="logo-epicode" />
+  </div>
+  <h1 class="title">Results</h1>
+  <h2 class="summary">The summary of your answers:</h2>
+</header>
+<main>
+  <section class="container">
+    <div class="correct">
+      <h3 class="cor-wro">Correct</h3>
+      <h3 class="cor-wro percentuali">${percentuali}%</h3>
+      <p class="domande">${correctAnswersContainer}/${usedQuestion.length} questions</p>
+    </div>
+    <div class="inblock-circle">
+    ${message}
+      <p class="send">
+        We'll send you the certificate<br />
+        in few minutes
+      </p>
+      <p class="send">
+        Check your email (including<br />
+        promotions/spam folder)
+      </p>
+    </div>
+    <div class="wrong">
+      <h3 class="cor-wro">Wrong</h3>
+      <h3 class="cor-wro percentuali">${100 - percentuali}%</h3>
+      <p class="domande"> ${usedQuestion.length - correctAnswersContainer}/${usedQuestion.length} questions</p>
+    </div>
+  </section>
+  <div class="button"><button id="but" class="border-button">RATE US</button></div>
+</main>
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
+"></script>
+    <script src="./assets/js/index.js"></script>`;
+  rateUs();
+};
+
+const rateUs = () => {
+  const btnRateUs = document.getElementById("but");
+  btnRateUs.addEventListener("click", () => {
+    window.location.href = "../../feedback.html";
+  });
+};
 window.onload = function () {
   questionFromArray();
   init();
