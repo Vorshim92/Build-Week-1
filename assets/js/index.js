@@ -270,12 +270,13 @@ const resultPage = function () {
 <main>
   <section class="container">
     <div class="correct">
-      <h3 class="cor-wro">Correct</h3>
-      <h3 class="cor-wro percentuali">${percentuali}%</h3>
+      <h3 class="cor-wro1">Correct</h3>
+      <h3 class="cor-wro2">${percentuali}%</h3>
       <p class="domande">${correctAnswersContainer}/${usedQuestion.length} questions</p>
     </div>
     <div class="inblock-circle">
     <canvas id="chart"></canvas>
+    <div id="inchart">
     ${message}
       <p class="send">
         We'll send you the certificate<br />
@@ -285,10 +286,12 @@ const resultPage = function () {
         Check your email (including<br />
         promotions/spam folder)
       </p>
+      </div>
+    
     </div>
     <div class="wrong">
-      <h3 class="cor-wro">Wrong</h3>
-      <h3 class="cor-wro percentuali">${100 - percentuali}%</h3>
+      <h3 class="cor-wro1">Wrong</h3>
+      <h3 class="cor-wro2">${100 - percentuali}%</h3>
       <p class="domande"> ${usedQuestion.length - correctAnswersContainer}/${usedQuestion.length} questions</p>
     </div>
   </section>
@@ -300,6 +303,8 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
     <script src="./assets/js/index.js"></script>`;
   rateUs();
   drawPieChart(correctAnswersContainer, 10);
+  newChart.data.datasets[0].backgroundColor[0] = "rgba(194, 18, 141, 1)";
+  newChart.data.datasets[0].backgroundColor[1] = "rgba(0, 255, 255, 1)";
 };
 
 const rateUs = () => {
