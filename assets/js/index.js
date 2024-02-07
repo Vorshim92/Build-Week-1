@@ -89,24 +89,25 @@ let newChart;
 let timeCounter = 0;
 let incorrectAnswer = [];
 
+// FUNZIONE CHE GENERA AD OGNI GIRO UNA DOMANDA CASUALE E LE RELATIVE RISPOSTE NEI PULSANTI
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
 
   h1Question.innerText = "";
   let randQuest;
   do {
-    randQuest = Math.floor(Math.random() * questions.length);
-  } while (usedQuestion.some((usedquestion) => usedquestion.question === questions[randQuest].question));
-  usedQuestion.push(questions[randQuest]);
+    randQuest = Math.floor(Math.random() * questions.length); // genero un numero casuale da usare come index casuale per l'array delle domande
+  } while (usedQuestion.some((usedquestion) => usedquestion.question === questions[randQuest].question)); // il controllo per la condizione del while lo faccio tra le stringhe dei paramentri question degli oggetti dei due array
+  usedQuestion.push(questions[randQuest]); // pusho dentro l'array di controllo per le domande usate la domanda uscita
 
   h1Question.innerText = questions[randQuest].question;
   const buttons = document.querySelector(".answers-container");
-  // ARRAY delle Risposte Totali, l'ultima è quella CORRETTA
-  let totalAnswers = questions[randQuest].incorrect_answers.concat(questions[randQuest].correct_answer);
 
-  // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali
-  buttons.innerHTML = "";
+  let totalAnswers = questions[randQuest].incorrect_answers.concat(questions[randQuest].correct_answer); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
+
+  buttons.innerHTML = ""; // resetto per sicurezza i pulsanti ad ogni iterazione
   for (let i = 0; i < totalAnswers.length; i++) {
+    // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali
     buttons.innerHTML += `<button class="answer"></button>`;
   }
 
@@ -114,6 +115,7 @@ const questionFromArray = () => {
   const answers = document.querySelectorAll(".answers-container > button");
   let usedAnswer = [];
   let randAnswer;
+  // stesso sistema di controllo simile a quello della creazione randomica delle domande, con un forEach però
   answers.forEach((button) => {
     do {
       randAnswer = Math.floor(Math.random() * totalAnswers.length);
@@ -121,13 +123,16 @@ const questionFromArray = () => {
     usedAnswer.push(randAnswer);
     button.innerText = totalAnswers[randAnswer];
   });
-  buttonClick();
-  variableNumOfPage();
+  buttonClick(); // richiamo la funzione alla riga 212 per aggiungere ai pulsati l'Event Listener del click
+  variableNumOfPage(); // richiamo la funzione alla riga 231 ad ogni giro di domanda per aggiornare il numero della question nel footer
 };
 
+// costante commentata per eventualmente lavorare sul resize del grafico in modo responsive. da implementare in futuro
 // const handleResize = (chart) => {
 //   chart.resize();
 // };
+
+//funzione per creare il grafico doughnut
 function drawPieChart(value, maxValue) {
   const ctx = document.getElementById("chart").getContext("2d");
 
@@ -168,18 +173,19 @@ function drawPieChart(value, maxValue) {
   });
 }
 
+// Funzione per reimposta il contatore del grafico ad ogni giro di counter
 function updateChart(chart) {
   chart.data.datasets[0].data[0] = timeCounter;
   chart.data.datasets[0].data[1] = 60 - timeCounter;
   chart.update();
-  // Reimposta il contatore del grafico
 }
-
+// funzione per inizializzare il grafico a torta all'avvio, compreso del setInterval
 const init = () => {
   drawPieChart(0, 60);
   countdownTimer();
 };
 
+// funzione che gestisce il timer del grafico. ogni volta che viene richiamato resetta il timer a 0 (visto che il grafico lavora sul Maxvalue - value)
 const countdownTimer = () => {
   timeCounter = 0;
   interval = setInterval(() => {
@@ -196,17 +202,20 @@ const countdownTimer = () => {
   }, 1000);
 };
 
+// funzione per restartare il timer
 function restartTimer() {
   clearInterval(interval);
   countdownTimer();
 }
+
+// funzione importante che si attiva solo quando siamo all'ultima domanda, ferma l'intervallo e richiama la funzione che ci porta alla pagina nuova Result
 function lastQuestion() {
   if (usedQuestion.length === questions.length) {
-    resultPage();
     clearInterval(interval);
+    resultPage();
   }
 }
-
+// funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
   buttons.forEach((button) => {
@@ -225,22 +234,24 @@ const buttonClick = () => {
   });
 };
 
-// FUNZIONE PER IL NUMERO DI PAGINA/DOMANDA
+// FUNZIONE PER IL NUMERO DI PAGINA/DOMANDA NEL FOOTER
 const variableNumOfPage = function () {
   const numOfPageContainer = document.querySelector(`.question-number`);
   numOfPageContainer.innerText = usedQuestion.length;
 };
 
+//SUPER RESET DELLA PAGINA PER PASSARE A QUELLA DEI RISULTATI
 const resultPage = function () {
-  newChart.destroy();
+  newChart.destroy(); // distruggo il vecchio newChart (grafico del timer) per poterlo ricreare successivamente per altro utilizzo
 
+  // CREAZIONE ARRAY CON LE DOMANDE SBAGLIATE, FACENDO UN ARRAY CONFRONTANDO QUELLE CORRETTE E l'ARRAY MADRE DELLE DOMANDE
   incorrectAnswer = questions.filter(
     (obj2) => !correctAnswersContainer.some((obj1) => obj1.question === obj2.question)
   );
   console.log(incorrectAnswer);
   console.log(correctAnswersContainer);
   const head = document.getElementById("newHead");
-  head.innerHTML = "";
+  head.innerHTML = ""; // reset dell'head e successivo innerHTML con la nuova struttura, tra cui il nuovo foglio di stile css.
   head.innerHTML = `<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -264,7 +275,7 @@ const resultPage = function () {
   }
 
   const body = document.body;
-  body.innerHTML = "";
+  body.innerHTML = ""; // reset del contenuto del body e successivo innerHTML con la nuova struttura.
   body.innerHTML = `<header>
   <div class="logo-epicode">
     <img src="./assets/img/epicode_logo.png" alt="logo-epicode" />
@@ -304,12 +315,13 @@ const resultPage = function () {
 https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
-  rateUs();
-  drawPieChart(correctAnswersContainer.length, 10);
+  rateUs(); // richiamo la funzione per il pulsante Rate US
+  drawPieChart(correctAnswersContainer.length, 10); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
   newChart.data.datasets[0].backgroundColor[0] = "rgba(194, 18, 141, 1)";
   newChart.data.datasets[0].backgroundColor[1] = "rgba(0, 255, 255, 1)";
 };
 
+// funzione redirect pulsante Rate US
 const rateUs = () => {
   const btnRateUs = document.getElementById("but");
   btnRateUs.addEventListener("click", () => {
@@ -320,22 +332,4 @@ const rateUs = () => {
 window.onload = function () {
   questionFromArray();
   init();
-  // TIPS:
-  // SE MOSTRI TUTTE LE RISPOSTE ASSIEME IN FORMATO LISTA:
-  // Per ogni domanda, crea un container e incorporale tutte all'interno.
-  // Crea poi dei radio button
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
-  // con le risposte corrette e incorrette come opzioni
-  // (dovrai probabilmente cercare su un motore di ricerca come ottenere un valore da un radio button in JS per ottenere il punteggio finale)
-  //
-  // SE MOSTRI UNA DOMANDA ALLA VOLTA:
-  // Mostra la prima domanda con il testo e i radio button.
-  // Quando l'utente seleziona una risposta, passa alla domanda successiva dell'array e sostituisci quella precedentemente visualizzata con quella corrente,
-  // salvando le risposte dell'utente in una variabile
 };
-
-// Come calcolare il risultato? Hai due strade:
-// Se stai mostrando tutte le domande nello stesso momento, controlla semplicemente se i radio button selezionati sono === correct_answer
-// Se stai mostrando una domanda alla volta, aggiungi semplicemente un punto alla variabile del punteggio che hai precedentemente creato SE la risposta selezionata è === correct_answer
-
-// BUON LAVORO 💪🚀

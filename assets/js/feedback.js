@@ -1,3 +1,4 @@
+// FUNZIONE PER GENERARE I DIV CON DENTRO LE STELLE .SVG
 const starsRating = () => {
   const divStar = document.querySelector(".stars");
   for (let i = 0; i < 10; i++) {
@@ -8,7 +9,7 @@ const starsRating = () => {
         />
       </svg></div>`;
   }
-  clickStar();
+  clickStar(); // richiamo la funzione immediatamente dopo la creazione delle stelle per potergli aggiungere i vari eventListener
 };
 
 const clickStar = () => {
