@@ -131,7 +131,7 @@ const questionFromArray = () => {
 //   chart.resize();
 // };
 function drawPieChart(value, maxValue) {
-  const ctx = document.getElementById("countdown").getContext("2d");
+  const ctx = document.getElementById("chart").getContext("2d");
 
   newChart = new Chart(ctx, {
     type: "doughnut",
@@ -233,6 +233,7 @@ const variableNumOfPage = function () {
 };
 
 const resultPage = function () {
+  newChart.destroy();
   const head = document.getElementById("newHead");
   head.innerHTML = "";
   head.innerHTML = `<meta charset="UTF-8" />
@@ -274,6 +275,7 @@ const resultPage = function () {
       <p class="domande">${correctAnswersContainer}/${usedQuestion.length} questions</p>
     </div>
     <div class="inblock-circle">
+    <canvas id="chart"></canvas>
     ${message}
       <p class="send">
         We'll send you the certificate<br />
@@ -297,6 +299,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
   rateUs();
+  drawPieChart(correctAnswersContainer, 10);
 };
 
 const rateUs = () => {
@@ -305,6 +308,7 @@ const rateUs = () => {
     window.location.href = "../../feedback.html";
   });
 };
+
 window.onload = function () {
   questionFromArray();
   init();
