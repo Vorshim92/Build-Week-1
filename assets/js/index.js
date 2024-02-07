@@ -124,7 +124,6 @@ const questionFromArray = () => {
     }
   });
   buttonClick();
-  console.log(usedQuestion);
   console.log(correctAnswersContainer);
   variableNumOfPage();
 };
@@ -181,7 +180,7 @@ const init = () => {
 const countdownTimer = () => {
   setInterval(() => {
     timeCounter += 1;
-    console.log(timeCounter);
+    // console.log(timeCounter);
     if (timeCounter === 60) {
       questionFromArray();
       timeCounter = 0;
@@ -193,7 +192,7 @@ const countdownTimer = () => {
 
 const endOfQuestions = () => {
   if (usedQuestion.length === 10) {
-    resultPage(correctAnswersContainer);
+    resultPage();
   }
 };
 
@@ -207,6 +206,7 @@ const buttonClick = () => {
       } else {
         questionFromArray();
       }
+      endOfQuestions();
     });
   });
 };
@@ -217,7 +217,7 @@ const variableNumOfPage = function () {
   numOfPageContainer.innerText = usedQuestion.length;
 };
 
-const resultPage = function (correctAnswersContainer) {
+const resultPage = function () {
   const head = document.getElementById("newHead");
   head.innerHTML = "";
   head.innerHTML = `<meta charset="UTF-8" />
@@ -234,7 +234,7 @@ const resultPage = function (correctAnswersContainer) {
 
   <link rel="stylesheet" href="./assets/css/style-result.css" />`;
 
-  let percentuali = Math.round((correctAnswersContainer / usedQuestion.length) * 100 * 10) / 10;
+  let percentuali = Math.round((correctAnswersContainer / usedQuestion.length) * 1000) / 10;
   let message = "";
   if (percentuali >= 60) {
     message = '<h5 class="cong">Congratulations!</h5><h5 class="pass">You passed the exam.</h5>';
@@ -275,17 +275,18 @@ const resultPage = function (correctAnswersContainer) {
       <p class="domande"> ${usedQuestion.length - correctAnswersContainer}/${usedQuestion.length} questions</p>
     </div>
   </section>
-  <div id="but" class="button"><button class="border-button">RATE US</button></div>
+  <div class="button"><button id="but" class="border-button">RATE US</button></div>
 </main>
 <script src="
 https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
+  rateUs();
 };
 
 const rateUs = () => {
   const btnRateUs = document.getElementById("but");
-  rateUs.addEventListener("click", () => {
+  btnRateUs.addEventListener("click", () => {
     window.location.href = "../../feedback.html";
   });
 };
