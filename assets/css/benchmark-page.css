@@ -81,7 +81,7 @@ main .question-container .question-style {
 /*-------------------ANSWERS--------------------*/
 
 main .answers-container {
-  width: 60%;
+  width: 50%;
   margin: auto;
   text-align: center;
   margin-top: 4rem;
