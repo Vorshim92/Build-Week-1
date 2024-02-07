@@ -128,8 +128,12 @@ const questionFromArray = () => {
   variableNumOfPage();
 };
 
+// const handleResize = (chart) => {
+//   chart.resize();
+// };
 function drawPieChart(value, maxValue) {
   const ctx = document.getElementById("countdown").getContext("2d");
+
   newChart = new Chart(ctx, {
     type: "doughnut",
     data: {
@@ -144,6 +148,9 @@ function drawPieChart(value, maxValue) {
       cutout: "75%",
       borderWidth: 0,
       hoverBorderWidth: 2,
+      // responsive: true,
+      // onResize: handleResize,
+      // maintainAspectRatio: false,
       tooltips: {
         enabled: false,
       },
@@ -178,18 +185,23 @@ const init = () => {
 
 const countdownTimer = () => {
   timeCounter = 0;
-  setInterval(() => {
+  interval = setInterval(() => {
     timeCounter += 1;
     // console.log(timeCounter);
     if (timeCounter === 60) {
       questionFromArray();
-      timeCounter = 0;
+      restartTimer();
     }
     updateChart(newChart);
     let secondi = document.getElementById("seconds-remaining");
     secondi.innerText = 60 - timeCounter;
   }, 1000);
 };
+
+function restartTimer() {
+  clearInterval(interval);
+  countdownTimer();
+}
 
 const endOfQuestions = () => {
   if (usedQuestion.length === 10) {
@@ -207,6 +219,8 @@ const buttonClick = () => {
       } else {
         questionFromArray();
       }
+      restartTimer();
+
       endOfQuestions();
     });
   });
