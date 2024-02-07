@@ -120,9 +120,6 @@ const questionFromArray = () => {
     } while (usedAnswer.includes(randAnswer));
     usedAnswer.push(randAnswer);
     button.innerText = totalAnswers[randAnswer];
-    if (randAnswer === totalAnswers.length - 1) {
-      button.setAttribute("id", "correct");
-    }
   });
   buttonClick();
   variableNumOfPage();
@@ -214,7 +211,7 @@ const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
   buttons.forEach((button) => {
     button.addEventListener("click", function (e) {
-      if (this.id === "correct") {
+      if (this.innerText === usedQuestion[usedQuestion.length - 1].correct_answer) {
         correctAnswersContainer.push(usedQuestion[usedQuestion.length - 1]);
         lastQuestion();
       } else {
