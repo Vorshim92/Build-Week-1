@@ -29,10 +29,10 @@ header .time-container {
 
 header .time-container .time {
   font-size: 0.9rem;
-  bottom: 144px;
+  bottom: 151px;
   position: relative;
   text-align: center;
-  line-height: 2rem;
+  line-height: 2.3rem;
 }
 
 header .time-container .time p {
@@ -41,6 +41,7 @@ header .time-container .time p {
 
 #seconds-remaining {
   font-size: 400%;
+  font-family: "Inter";
 }
 
 /*-----------------MAIN-----------------------*/
@@ -87,7 +88,8 @@ main .answers-container {
 }
 
 main .answers-container .answer {
-  border-color: aliceblue;
+  font-family: "Inter";
+  border-color: #ffffff85;
   color: white;
   width: 18rem;
   height: 4rem;
@@ -104,7 +106,7 @@ main .answers-container .answer {
 }
 
 main .answers-container .answer:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #d20093cc;
 }
 
 /*------------------FOOTER----------------*/

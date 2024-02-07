@@ -136,7 +136,7 @@ function drawPieChart(value, maxValue) {
       datasets: [
         {
           data: [value, maxValue - value],
-          backgroundColor: ["rgba(0, 255, 255, 1)", "rgba(151, 105, 156, 1)"],
+          backgroundColor: ["rgba(0, 255, 255, 1)", "rgba(151, 105, 156, 0.7)"],
         },
       ],
     },
