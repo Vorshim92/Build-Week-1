@@ -83,7 +83,7 @@ const questions = [
 ];
 
 // variabili globali
-let correctAnswersContainer = 0;
+let correctAnswersContainer = [];
 let usedQuestion = [];
 let newChart;
 let timeCounter = 0;
@@ -186,8 +186,7 @@ const countdownTimer = () => {
   timeCounter = 0;
   interval = setInterval(() => {
     if (usedQuestion.length === 10 && timeCounter === 60) {
-      resultPage();
-      clearInterval(interval);
+      lastQuestion();
     } else if (timeCounter === 60) {
       questionFromArray();
       restartTimer();
@@ -203,25 +202,29 @@ function restartTimer() {
   clearInterval(interval);
   countdownTimer();
 }
+function lastQuestion() {
+  if (usedQuestion.length === 10) {
+    resultPage();
+    clearInterval(interval);
+  }
+}
 
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
   buttons.forEach((button) => {
     button.addEventListener("click", function (e) {
       if (this.id === "correct") {
-        correctAnswersContainer++;
-        if (usedQuestion.length === 10) {
-          resultPage();
-          clearInterval(interval);
-        }
+        correctAnswersContainer.push(questions[usedQuestion[length]]);
+        lastQuestion();
       } else {
-        if (usedQuestion.length === 10) {
-          resultPage();
-          clearInterval(interval);
-        }
+        lastQuestion();
       }
-      questionFromArray();
-      restartTimer();
+      if (usedQuestion.length !== 10) {
+        questionFromArray();
+        restartTimer();
+      }
+      console.log(correctAnswersContainer);
+      console.log(correctAnswersContainer.length);
     });
   });
 };
@@ -250,7 +253,7 @@ const resultPage = function () {
 
   <link rel="stylesheet" href="./assets/css/style-result.css" />`;
 
-  let percentuali = Math.round((correctAnswersContainer / usedQuestion.length) * 1000) / 10;
+  let percentuali = Math.round((correctAnswersContainer.length / usedQuestion.length) * 1000) / 10;
   let message = "";
   if (percentuali >= 60) {
     message = '<h5 class="cong">Congratulations!</h5><h5 class="pass">You passed the exam.</h5>';
@@ -272,7 +275,7 @@ const resultPage = function () {
     <div class="correct">
       <h3 class="cor-wro">Correct</h3>
       <h3 class="cor-wro percentuali">${percentuali}%</h3>
-      <p class="domande">${correctAnswersContainer}/${usedQuestion.length} questions</p>
+      <p class="domande">${correctAnswersContainer.length}/${usedQuestion.length} questions</p>
     </div>
     <div class="inblock-circle">
     <canvas id="chart"></canvas>
@@ -289,7 +292,7 @@ const resultPage = function () {
     <div class="wrong">
       <h3 class="cor-wro">Wrong</h3>
       <h3 class="cor-wro percentuali">${100 - percentuali}%</h3>
-      <p class="domande"> ${usedQuestion.length - correctAnswersContainer}/${usedQuestion.length} questions</p>
+      <p class="domande"> ${usedQuestion.length - correctAnswersContainer.length}/${usedQuestion.length} questions</p>
     </div>
   </section>
   <div class="button"><button id="but" class="border-button">RATE US</button></div>
@@ -299,7 +302,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
   rateUs();
-  drawPieChart(correctAnswersContainer, 10);
+  drawPieChart(correctAnswersContainer.length, 10);
 };
 
 const rateUs = () => {
