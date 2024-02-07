@@ -178,7 +178,7 @@ function updateChart(chart) {
 }
 
 const init = () => {
-  drawPieChart(60, 60);
+  drawPieChart(0, 60);
   countdownTimer();
 };
 

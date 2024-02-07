@@ -1,9 +1,16 @@
+/* RULES */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /* SFONDO E LOGO */
 body {
   background-image: url(../img/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0;
   width: 100%;
   padding-inline: 100px;
   padding-block: 50px;
@@ -23,13 +30,17 @@ header {
   margin: auto;
   font-size: 16px;
   color: #ffffff;
-  width: 80%;
+  width: 100%;
   line-height: 2rem;
   margin-bottom: 3.5rem;
 }
 
 h2 {
   font-size: 16px;
+}
+h3,
+h5 {
+  margin: 0;
 }
 
 .title {
@@ -45,6 +56,7 @@ h2 {
   text-align: center;
   font-size: 1.7rem;
   font-weight: 400;
+  margin-block: 16px;
 }
 
 .send {
@@ -56,6 +68,7 @@ h2 {
 p {
   font-size: 16px;
   color: #ffffff;
+  margin: 0;
 }
 .cor-wro1 {
   font-size: 4rem;
@@ -75,21 +88,29 @@ p {
   margin: auto;
   width: 80%;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /* START SECTION ELEMENT */
 .correct {
-  margin-block: auto;
-  margin-left: 7rem;
+  margin: 0;
+  display: flex;
+  /* margin-block: auto; */
+  /* margin-left: 7rem; */
   width: 33%;
-  text-align: left;
-  line-height: 1%;
-  margin-bottom: 6rem;
+  /* text-align: left; */
+  /* line-height: 1%; */
+  /* margin-bottom: 12rem; */
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 /* MIDDLE SECTION ELEMENT */
 .inblock-circle {
   width: auto;
+  max-height: 500px;
   display: flex;
   align-items: stretch;
   flex-direction: column;
@@ -102,22 +123,25 @@ p {
 
 #inchart {
   color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(25%, -25%);
-  z-index: 1;
+  position: relative;
+  bottom: 50%;
+  right: 0;
   /* display: none; */
 }
 
 /* END SECTION ELEMENT */
 .wrong {
-  margin-block: auto;
-  margin-right: 7rem;
+  margin: 0;
+  display: flex;
+  /* margin-block: auto; */
+  /* margin-left: 7rem; */
   width: 33%;
-  text-align: right;
-  line-height: 1%;
-  margin-bottom: 6rem;
+  /* text-align: left; */
+  /* line-height: 1%; */
+  /* margin-bottom: 12rem; */
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .domande {
