@@ -279,6 +279,7 @@ const resultPage = function () {
     </div>
     <div class="inblock-circle">
     <canvas id="chart"></canvas>
+    <div>
     ${message}
       <p class="send">
         We'll send you the certificate<br />
@@ -287,7 +288,7 @@ const resultPage = function () {
       <p class="send">
         Check your email (including<br />
         promotions/spam folder)
-      </p>
+      </p></div>
     </div>
     <div class="wrong">
       <h3 class="cor-wro">Wrong</h3>
