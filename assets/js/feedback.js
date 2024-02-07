@@ -15,11 +15,15 @@ const clickStar = () => {
   const allStar = document.querySelectorAll(".star");
   allStar.forEach((star, index) => {
     star.addEventListener("click", function (e) {
+      let rating = 0;
       for (let i = 0; i <= index; i++) {
         allStar[i].querySelector("path").setAttribute("fill", "#00FFFF");
+        for (let j = index + 1; j < allStar.length; j++) {
+          allStar[j].querySelector("path").setAttribute("fill", "#080c29");
+        }
       }
 
-      let rating = index + 1;
+      rating = index + 1;
       console.log(rating);
     });
   });
