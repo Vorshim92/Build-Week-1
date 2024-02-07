@@ -124,7 +124,6 @@ const questionFromArray = () => {
     }
   });
   buttonClick();
-  console.log(correctAnswersContainer);
   variableNumOfPage();
 };
 
@@ -186,12 +185,14 @@ const init = () => {
 const countdownTimer = () => {
   timeCounter = 0;
   interval = setInterval(() => {
-    timeCounter += 1;
-    // console.log(timeCounter);
-    if (timeCounter === 60) {
+    if (usedQuestion.length === 10 && timeCounter === 60) {
+      resultPage();
+      clearInterval(interval);
+    } else if (timeCounter === 60) {
       questionFromArray();
       restartTimer();
     }
+    timeCounter += 1;
     updateChart(newChart);
     let secondi = document.getElementById("seconds-remaining");
     secondi.innerText = 60 - timeCounter;
@@ -203,25 +204,24 @@ function restartTimer() {
   countdownTimer();
 }
 
-const endOfQuestions = () => {
-  if (usedQuestion.length === 10) {
-    resultPage();
-  }
-};
-
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
   buttons.forEach((button) => {
     button.addEventListener("click", function (e) {
       if (this.id === "correct") {
         correctAnswersContainer++;
-        questionFromArray();
+        if (usedQuestion.length === 10) {
+          resultPage();
+          clearInterval(interval);
+        }
       } else {
-        questionFromArray();
+        if (usedQuestion.length === 10) {
+          resultPage();
+          clearInterval(interval);
+        }
       }
+      questionFromArray();
       restartTimer();
-
-      endOfQuestions();
     });
   });
 };
