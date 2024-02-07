@@ -20,14 +20,16 @@ header img {
   width: 15%;
 }
 header .time-container {
-  width: 10%;
-  margin-left: auto;
+  left: 85%;
+  position: relative;
+  width: 200px;
+  height: 200px;
   color: white;
 }
 
 header .time-container .time {
   font-size: 0.9rem;
-  bottom: 152px;
+  bottom: 144px;
   position: relative;
   text-align: center;
   line-height: 2rem;
@@ -57,11 +59,11 @@ main h2 {
   margin-bottom: 15px;
 }
 
-.c-countdown-wrapper {
+/* .c-countdown-wrapper {
   max-width: 300px;
   width: 100%;
   margin: 20px auto;
-}
+} */
 /*--------------QUESTION-----------------*/
 
 main .question-container {
