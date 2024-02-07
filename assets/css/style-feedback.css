@@ -91,6 +91,7 @@ main {
   border-bottom: 3px solid #900080;
   font-size: 1.2rem;
   padding: 1rem;
+  color: white;
 }
 
 .button {
@@ -110,4 +111,5 @@ button {
   font-size: 1.7rem;
   font-weight: bolder;
   box-shadow: 0px 0px 45px 3px #00ffff;
+  cursor: pointer;
 }

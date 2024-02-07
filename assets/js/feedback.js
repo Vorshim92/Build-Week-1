@@ -13,9 +13,14 @@ const starsRating = () => {
 
 const clickStar = () => {
   const allStar = document.querySelectorAll(".star");
-  allStar.forEach((star) => {
+  allStar.forEach((star, index) => {
     star.addEventListener("click", function (e) {
-      this.querySelector("path").setAttribute("fill", "#00FFFF");
+      for (let i = 0; i <= index; i++) {
+        allStar[i].querySelector("path").setAttribute("fill", "#00FFFF");
+      }
+
+      let rating = index + 1;
+      console.log(rating);
     });
   });
 };
