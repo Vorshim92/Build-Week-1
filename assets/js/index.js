@@ -177,6 +177,7 @@ const init = () => {
 };
 
 const countdownTimer = () => {
+  timeCounter = 0;
   setInterval(() => {
     timeCounter += 1;
     // console.log(timeCounter);
