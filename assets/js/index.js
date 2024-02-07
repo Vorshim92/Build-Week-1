@@ -87,6 +87,7 @@ let correctAnswersContainer = [];
 let usedQuestion = [];
 let newChart;
 let timeCounter = 0;
+let incorrectAnswer = [];
 
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
@@ -95,8 +96,8 @@ const questionFromArray = () => {
   let randQuest;
   do {
     randQuest = Math.floor(Math.random() * questions.length);
-  } while (usedQuestion.includes(randQuest));
-  usedQuestion.push(randQuest);
+  } while (usedQuestion.some((usedquestion) => usedquestion.question === questions[randQuest].question));
+  usedQuestion.push(questions[randQuest]);
 
   h1Question.innerText = questions[randQuest].question;
   const buttons = document.querySelector(".answers-container");
@@ -185,7 +186,7 @@ const init = () => {
 const countdownTimer = () => {
   timeCounter = 0;
   interval = setInterval(() => {
-    if (usedQuestion.length === 10 && timeCounter === 60) {
+    if (usedQuestion.length === questions.length && timeCounter === 60) {
       lastQuestion();
     } else if (timeCounter === 60) {
       questionFromArray();
@@ -203,7 +204,7 @@ function restartTimer() {
   countdownTimer();
 }
 function lastQuestion() {
-  if (usedQuestion.length === 10) {
+  if (usedQuestion.length === questions.length) {
     resultPage();
     clearInterval(interval);
   }
@@ -214,17 +215,15 @@ const buttonClick = () => {
   buttons.forEach((button) => {
     button.addEventListener("click", function (e) {
       if (this.id === "correct") {
-        correctAnswersContainer.push(questions[usedQuestion[length]]);
+        correctAnswersContainer.push(usedQuestion[usedQuestion.length - 1]);
         lastQuestion();
       } else {
         lastQuestion();
       }
-      if (usedQuestion.length !== 10) {
+      if (usedQuestion.length !== questions.length) {
         questionFromArray();
         restartTimer();
       }
-      console.log(correctAnswersContainer);
-      console.log(correctAnswersContainer.length);
     });
   });
 };
@@ -237,6 +236,12 @@ const variableNumOfPage = function () {
 
 const resultPage = function () {
   newChart.destroy();
+
+  incorrectAnswer = questions.filter(
+    (obj2) => !correctAnswersContainer.some((obj1) => obj1.question === obj2.question)
+  );
+  console.log(incorrectAnswer);
+  console.log(correctAnswersContainer);
   const head = document.getElementById("newHead");
   head.innerHTML = "";
   head.innerHTML = `<meta charset="UTF-8" />
