@@ -280,7 +280,7 @@ const init = () => {
 
 // funzione che gestisce il timer del grafico. ogni volta che viene richiamato resetta il timer a 0 (visto che il grafico lavora sul Maxvalue - value)
 const countdownTimer = () => {
-  timeCounter = 50;
+  timeCounter = 0;
   interval = setInterval(() => {
     if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
       lastQuestion();
