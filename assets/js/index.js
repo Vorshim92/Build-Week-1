@@ -96,11 +96,8 @@ let incorrectAnswer = [];
 
 const formQuestions = () => {
   const questionForm = document.getElementById("pre-questionary");
-  console.log(questionForm);
   questionForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    console.log(document.querySelector("#diff-container > div > input:checked").value);
-    console.log(document.querySelector("#numQuest-container > div > input:checked").value);
 
     indexDifficulty = document.querySelector("#diff-container > div > input:checked").value;
     amountQuestions = document.querySelector("#numQuest-container > div > input:checked").value;
@@ -111,22 +108,17 @@ const formQuestions = () => {
 };
 
 async function fetchQuestions(amount, index) {
-  try {
-    const response = await fetch(
-      `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty[index]}`
-    );
-    const data = await response.json();
-    const questions = data.results;
+  const response = await fetch(
+    `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty[index]}`
+  );
+  const data = await response.json();
+  const questions = data.results;
 
-    // Push dell'array di domande all'interno dell'array vuoto
-    arrayQuestions.push(...questions);
-    benchmarkPage();
-    init();
-    // Stampa dell'array con le domande aggiunte
-    console.log("Array con le domande:", arrayQuestions);
-  } catch (error) {
-    console.error("Errore durante il recupero delle domande:", error);
-  }
+  // Push dell'array di domande all'interno dell'array vuoto
+  arrayQuestions.push(...questions);
+  benchmarkPage();
+  init();
+  // Stampa dell'array con le domande aggiunte
 }
 
 const benchmarkPage = function () {
@@ -162,8 +154,6 @@ const benchmarkPage = function () {
   <!-- BEGIN_FOOTER -->
   <footer>
     <div class="question-counter-container">
-      <p>QUESTION</p>
-      <p class="question-number"></p>
     </div>
   </footer>
   <!-- END_FOOTER -->
@@ -231,7 +221,7 @@ function drawPieChart(value, maxValue) {
       datasets: [
         {
           data: [value, maxValue - value],
-          backgroundColor: ["rgba(0, 255, 255, 1)", "rgba(151, 105, 156, 0.7)"],
+          backgroundColor: ["rgba(151, 105, 156, 0.7)", "rgba(0, 255, 255, 1)"],
         },
       ],
     },
@@ -264,8 +254,9 @@ function drawPieChart(value, maxValue) {
 
 // Funzione per reimposta il contatore del grafico ad ogni giro di counter
 function updateChart(chart) {
-  chart.data.datasets[0].data[0] = timeCounter;
-  chart.data.datasets[0].data[1] = 60 - timeCounter;
+  chart.data.datasets[0].data[0] = 60 - timeCounter;
+  chart.data.datasets[0].data[1] = timeCounter;
+
   chart.update();
 }
 // funzione per inizializzare il grafico a torta all'avvio, compreso del setInterval
@@ -325,8 +316,14 @@ const buttonClick = () => {
 
 // FUNZIONE PER IL NUMERO DI PAGINA/DOMANDA NEL FOOTER
 const variableNumOfPage = function () {
-  const numOfPageContainer = document.querySelector(`.question-number`);
-  numOfPageContainer.innerText = usedQuestion.length + " / " + arrayQuestions.length;
+  // const numOfPageContainer = document.querySelector(`.question-number`);
+  // numOfPageContainer.innerText = usedQuestion.length + " / " + arrayQuestions.length;
+
+  const numOfPageContainer = document.querySelector(`.question-counter-container`);
+  numOfPageContainer.innerHTML = "";
+  numOfPageContainer.innerHTML = `<p>QUESTION</p>
+  <p class="question-number">${usedQuestion.length} </p>
+  <p> / ${arrayQuestions.length}</p>`;
 };
 
 //SUPER RESET DELLA PAGINA PER PASSARE A QUELLA DEI RISULTATI
@@ -337,8 +334,7 @@ const resultPage = function () {
   incorrectAnswer = arrayQuestions.filter(
     (obj2) => !correctAnswersContainer.some((obj1) => obj1.question === obj2.question)
   );
-  console.log(incorrectAnswer);
-  console.log(correctAnswersContainer);
+
   const head = document.getElementById("newHead");
   head.innerHTML = ""; // reset dell'head e successivo innerHTML con la nuova struttura, tra cui il nuovo foglio di stile css.
   head.innerHTML = `<meta charset="UTF-8" />
@@ -405,7 +401,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
   rateUs(); // richiamo la funzione per il pulsante Rate US
-  drawPieChart(correctAnswersContainer.length, 10); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
+  drawPieChart(incorrectAnswer.length, arrayQuestions.length); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
   newChart.data.datasets[0].backgroundColor[0] = "rgba(194, 18, 141, 1)";
   newChart.data.datasets[0].backgroundColor[1] = "rgba(0, 255, 255, 1)";
 };
