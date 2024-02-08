@@ -195,7 +195,7 @@ const questionFromArray = () => {
         .replace(/&gt;/g, `>`)
         .replace(/&lt;/g, `<`)
     ); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
-  console.log(totalAnswers);
+
   buttons.innerHTML = ""; // resetto per sicurezza i pulsanti ad ogni iterazione
   for (let i = 0; i < totalAnswers.length; i++) {
     // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali
@@ -280,7 +280,7 @@ const init = () => {
 
 // funzione che gestisce il timer del grafico. ogni volta che viene richiamato resetta il timer a 0 (visto che il grafico lavora sul Maxvalue - value)
 const countdownTimer = () => {
-  timeCounter = 0;
+  timeCounter = 50;
   interval = setInterval(() => {
     if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
       lastQuestion();
@@ -308,22 +308,34 @@ function lastQuestion() {
     resultPage();
   }
 }
+
+const pauseAnswer = () => {};
+
 // funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
-  buttons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      if (this.innerText === usedQuestion[usedQuestion.length - 1].correct_answer) {
-        correctAnswersContainer.push(usedQuestion[usedQuestion.length - 1]);
-        lastQuestion();
-      } else {
-        lastQuestion();
-      }
-      if (usedQuestion.length !== arrayQuestions.length) {
-        questionFromArray();
-        restartTimer();
-      }
+  const handleClick = function (e) {
+    clearInterval(interval);
+    if (this.innerText === usedQuestion[usedQuestion.length - 1].correct_answer) {
+      correctAnswersContainer.push(usedQuestion[usedQuestion.length - 1]);
+      this.setAttribute("id", "correct");
+    } else {
+      this.setAttribute("id", "incorrect");
+    }
+    setTimeout(() => {
+      lastQuestion();
+      questionFromArray();
+      restartTimer();
+    }, 500);
+
+    // Rimuovi l'event listener da tutti i pulsanti
+    buttons.forEach((button) => {
+      button.removeEventListener("click", handleClick);
     });
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", handleClick);
   });
 };
 

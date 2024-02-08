@@ -109,6 +109,12 @@ main .answers-container .answer:hover {
   background-color: #d20093cc;
 }
 
+#correct {
+  background-color: #388750c2;
+}
+#incorrect {
+  background-color: #ff002687;
+}
 /*------------------FOOTER----------------*/
 
 footer {
