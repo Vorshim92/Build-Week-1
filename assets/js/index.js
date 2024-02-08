@@ -99,11 +99,11 @@ const formQuestions = () => {
   console.log(questionForm);
   questionForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    console.log(document.getElementById("level").value);
-    console.log(document.getElementById("num-question").value);
+    console.log(document.querySelector("#diff-container > div > input:checked").value);
+    console.log(document.querySelector("#numQuest-container > div > input:checked").value);
 
-    indexDifficulty = document.getElementById("level").value;
-    amountQuestions = document.getElementById("num-question").value;
+    indexDifficulty = document.querySelector("#diff-container > div > input:checked").value;
+    amountQuestions = document.querySelector("#numQuest-container > div > input:checked").value;
     fetchQuestions(amountQuestions, indexDifficulty);
   });
 
