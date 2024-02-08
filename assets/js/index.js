@@ -178,11 +178,24 @@ const questionFromArray = () => {
   } while (usedQuestion.some((usedquestion) => usedquestion.question === arrayQuestions[randQuest].question)); // il controllo per la condizione del while lo faccio tra le stringhe dei paramentri question degli oggetti dei due array
   usedQuestion.push(arrayQuestions[randQuest]); // pusho dentro l'array di controllo per le domande usate la domanda uscita
 
-  h1Question.innerText = arrayQuestions[randQuest].question;
+  h1Question.innerText = arrayQuestions[randQuest].question
+    .replace(/&#039;/g, "'")
+    .replace(/&quot;/g, `"`)
+    .replace(/&gt;/g, `>`)
+    .replace(/&lt;/g, `<`);
   const buttons = document.querySelector(".answers-container");
 
-  let totalAnswers = arrayQuestions[randQuest].incorrect_answers.concat(arrayQuestions[randQuest].correct_answer); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
-
+  // let totalAnswers = arrayQuestions[randQuest].incorrect_answers.concat(arrayQuestions[randQuest].correct_answer); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
+  let totalAnswers = arrayQuestions[randQuest].incorrect_answers
+    .concat(arrayQuestions[randQuest].correct_answer)
+    .map((answer) =>
+      answer
+        .replace(/&#039;/g, "'")
+        .replace(/&quot;/g, `"`)
+        .replace(/&gt;/g, `>`)
+        .replace(/&lt;/g, `<`)
+    ); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
+  console.log(totalAnswers);
   buttons.innerHTML = ""; // resetto per sicurezza i pulsanti ad ogni iterazione
   for (let i = 0; i < totalAnswers.length; i++) {
     // parte della funzione che aggiunge il numero di pulsanti corrispondente al numero di risposte totali

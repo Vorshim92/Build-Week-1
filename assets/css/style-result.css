@@ -131,6 +131,7 @@ p {
 }
 
 #inchart {
+  z-index: -1;
   color: white;
   position: relative;
   bottom: 57%;
