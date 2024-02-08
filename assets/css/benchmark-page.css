@@ -208,3 +208,7 @@ form button {
   cursor: pointer;
   text-align: center;
 }
+
+form button:hover {
+  color: white;
+}
