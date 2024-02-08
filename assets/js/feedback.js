@@ -1,3 +1,6 @@
+// variabili globali
+let feedback = [];
+let rating;
 // FUNZIONE PER GENERARE I DIV CON DENTRO LE STELLE .SVG
 const starsRating = () => {
   const divStar = document.querySelector(".stars");
@@ -14,7 +17,7 @@ const starsRating = () => {
 
 const clickStar = () => {
   const allStar = document.querySelectorAll(".div-star");
-
+  rating = 0;
   allStar.forEach((star, index) => {
     star.addEventListener("mouseenter", function (e) {
       for (let i = 0; i <= index - 1; i++) {
@@ -29,7 +32,6 @@ const clickStar = () => {
       }
     });
     star.addEventListener("click", function (e) {
-      let rating = 0;
       for (let i = 0; i <= index; i++) {
         allStar[i].querySelector("svg").setAttribute("id", "stars");
         for (let j = index + 1; j < allStar.length; j++) {
@@ -38,11 +40,26 @@ const clickStar = () => {
       }
 
       rating = index + 1;
-      console.log(rating);
     });
+  });
+};
+
+const submitRating = () => {
+  const formRating = document.getElementById("form-rating");
+  const comment = document.getElementById("input-text");
+  formRating.addEventListener("submit", function (e) {
+    // pushare nell'array feedback un oggetto contenente , rating, commento
+    console.log(comment.value);
+    console.log(rating);
+    let obj = { rate: `${rating}`, comment: `${comment.value}` };
+    console.log(obj);
+    feedback.push(obj);
+    console.log(feedback);
+    e.preventDefault();
   });
 };
 
 window.onload = function () {
   starsRating();
+  submitRating();
 };
