@@ -110,7 +110,7 @@ main .answers-container .answer:hover {
 }
 
 #correct {
-  background-color: #388750c2;
+  background-color: #388750cb;
 }
 #incorrect {
   background-color: #ff002687;
