@@ -283,7 +283,8 @@ const countdownTimer = () => {
   timeCounter = 0;
   interval = setInterval(() => {
     if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
-      lastQuestion();
+      clearInterval(interval);
+      resultPage();
     } else if (timeCounter === 60) {
       questionFromArray();
       restartTimer();
@@ -301,14 +302,6 @@ function restartTimer() {
 }
 
 // funzione importante che si attiva solo quando siamo all'ultima domanda, ferma l'intervallo e richiama la funzione che ci porta alla pagina nuova Result
-function lastQuestion() {
-  if (usedQuestion.length === arrayQuestions.length) {
-    clearInterval(interval);
-    resultPage();
-  }
-}
-
-const pauseAnswer = () => {};
 
 // funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
 const buttonClick = () => {
@@ -322,9 +315,13 @@ const buttonClick = () => {
       this.setAttribute("id", "incorrect");
     }
     setTimeout(() => {
-      lastQuestion();
-      questionFromArray();
-      restartTimer();
+      if (usedQuestion.length === arrayQuestions.length) {
+        clearInterval(interval);
+        resultPage();
+      } else {
+        questionFromArray();
+        restartTimer();
+      }
     }, 500);
 
     // Rimuovi l'event listener da tutti i pulsanti
