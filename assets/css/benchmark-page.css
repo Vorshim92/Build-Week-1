@@ -170,7 +170,7 @@ label:hover {
 }
 
 input:checked ~ label {
-  color: #00ffff;
+  color: #ffffff;
   font-size: 3rem;
 }
 
