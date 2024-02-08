@@ -39,7 +39,50 @@
     <!-- END_HEADER -->
 
     <!-- BEGIN_MAIN -->
-    <main></main>
+    <main>
+      <form id="pre-questionary">
+        <div id="form-container">
+          <fieldset id="diff-container">
+            <legend>Difficulty</legend>
+
+            <div class="field-div">
+              <input type="radio" id="easy" name="diff" value="0" checked />
+              <label for="easy">Easy</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="medium" name="diff" value="1" />
+              <label for="medium">Medium</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="hard" name="diff" value="2" />
+              <label for="hard">Hard</label>
+            </div>
+          </fieldset>
+
+          <fieldset id="numQuest-container">
+            <legend>Numero di domande</legend>
+
+            <div class="field-div">
+              <input type="radio" id="10" name="num" value="10" checked />
+              <label for="10">10</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="20" name="num" value="20" />
+              <label for="20">20</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="30" name="num" value="30" />
+              <label for="30">30</label>
+            </div>
+          </fieldset>
+        </div>
+        <button type="submit" class="custom-button">START QUIZ</button>
+      </form>
+    </main>
     <!-- END_MAIN -->
 
     <!-- BEGIN_FOOTER -->
