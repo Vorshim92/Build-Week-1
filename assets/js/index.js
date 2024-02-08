@@ -164,7 +164,6 @@ const benchmarkPage = function () {
     <div class="question-counter-container">
       <p>QUESTION</p>
       <p class="question-number"></p>
-      <p>/ 10</p>
     </div>
   </footer>
   <!-- END_FOOTER -->
@@ -327,7 +326,7 @@ const buttonClick = () => {
 // FUNZIONE PER IL NUMERO DI PAGINA/DOMANDA NEL FOOTER
 const variableNumOfPage = function () {
   const numOfPageContainer = document.querySelector(`.question-number`);
-  numOfPageContainer.innerText = usedQuestion.length;
+  numOfPageContainer.innerText = usedQuestion.length + " / " + arrayQuestions.length;
 };
 
 //SUPER RESET DELLA PAGINA PER PASSARE A QUELLA DEI RISULTATI
