@@ -147,47 +147,48 @@ form-container {
   text-align: center;
   color: white;
   font-family: "Inter", sans-serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8rem;
 }
 
 label {
   font-family: "Inter", sans-serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 400;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  appearance: none;
   width: 100%;
   color: #cb2376;
   text-align: center;
   cursor: pointer;
-}
-
-legend {
-  margin-bottom: 2rem;
+  position: relative;
+  bottom: 1rem;
 }
 
 label:hover {
   color: white;
+  /* border: 1px solid white; */
 }
 
 input:checked ~ label {
-  color: white;
+  color: #00ffff;
+  font-size: 3rem;
+}
+
+legend {
+  padding: 1rem;
 }
 
 fieldset input {
   display: none;
 }
+
 fieldset {
-  border: none;
+  border-radius: 15px;
 }
 
 .field-div {
   display: inline-block;
-  margin-inline: 2rem;
+  margin-inline: 3rem;
 }
 
 form {
