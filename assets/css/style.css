@@ -16,6 +16,7 @@ body {
   padding-block: 50px;
   font-size: 2rem;
   color: white;
+  margin-left: 5rem;
 }
 /* UTILITY */
 
@@ -127,12 +128,13 @@ section {
 
 .check-rule button {
   background-color: #00ffff;
-  width: 16rem;
-  height: 4rem;
+  width: 18rem;
+  height: 6rem;
+  margin-left: 20rem;
   display: inline-block;
-  box-shadow: 0px 0px 25px 1px rgba(0, 242, 255, 0.545);
+  box-shadow: 0px 0px 45px 3px #00ffff;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 28px;
   border: none;
   /* margin-left: 200px; */
   cursor: pointer;
