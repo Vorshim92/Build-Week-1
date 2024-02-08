@@ -297,7 +297,6 @@ const countdownTimer = () => {
 
 // funzione per restartare il timer
 function restartTimer() {
-  clearInterval(interval);
   countdownTimer();
 }
 
