@@ -117,8 +117,9 @@ button {
   border: none;
   background-color: #00ffff;
   color: #0c113b;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: bolder;
   box-shadow: 0px 0px 45px 3px #00ffff;
   cursor: pointer;
+  margin-top: 2rem;
 }
