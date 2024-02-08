@@ -83,6 +83,7 @@
 // ];
 
 let difficulty = ["easy", "medium", "hard"];
+let indexDifficulty;
 let amountQuestions;
 let arrayQuestions = [];
 
@@ -93,20 +94,36 @@ let newChart;
 let timeCounter = 0;
 let incorrectAnswer = [];
 
-async function fetchQuestions(amount, indexDifficulty) {
+const formQuestions = () => {
+  const questionForm = document.getElementById("pre-questionary");
+  console.log(questionForm);
+  questionForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    console.log(document.getElementById("level").value);
+    console.log(document.getElementById("num-question").value);
+
+    indexDifficulty = document.getElementById("level").value;
+    amountQuestions = document.getElementById("num-question").value;
+    fetchQuestions(amountQuestions, indexDifficulty);
+  });
+
+  //get Data from Form
+};
+
+async function fetchQuestions(amount, index) {
   try {
     const response = await fetch(
-      `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty[indexDifficulty]}`
+      `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty[index]}`
     );
     const data = await response.json();
     const questions = data.results;
 
     // Push dell'array di domande all'interno dell'array vuoto
     arrayQuestions.push(...questions);
-
+    benchmarkPage();
+    init();
     // Stampa dell'array con le domande aggiunte
     console.log("Array con le domande:", arrayQuestions);
-    questionFromArray();
   } catch (error) {
     console.error("Errore durante il recupero delle domande:", error);
   }
@@ -158,8 +175,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
   <script src="./assets/js/index.js"></script>
   <!-- END_SCRIPT -->`;
-
-  init();
+  questionFromArray();
 };
 
 // FUNZIONE CHE GENERA AD OGNI GIRO UNA DOMANDA CASUALE E LE RELATIVE RISPOSTE NEI PULSANTI
@@ -196,6 +212,7 @@ const questionFromArray = () => {
     usedAnswer.push(randAnswer);
     button.innerText = totalAnswers[randAnswer];
   });
+
   buttonClick(); // richiamo la funzione alla riga 212 per aggiungere ai pulsati l'Event Listener del click
   variableNumOfPage(); // richiamo la funzione alla riga 231 ad ogni giro di domanda per aggiornare il numero della question nel footer
 };
@@ -402,4 +419,6 @@ const rateUs = () => {
   });
 };
 
-window.onload = function () {};
+window.onload = function () {
+  formQuestions();
+};

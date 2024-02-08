@@ -39,7 +39,27 @@
     <!-- END_HEADER -->
 
     <!-- BEGIN_MAIN -->
-    <main></main>
+    <main>
+      <form id="pre-questionary">
+        <div>
+          <label for="difficulty">Difficulty:</label>
+          <select name="Difficulty" id="level">
+            <option value="0">Easy</option>
+            <option value="1">Medium</option>
+            <option value="2">Hard</option>
+          </select>
+          <fieldset>
+            <legend>Numero di Domande</legend>
+            <select name="siti" id="num-question">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </fieldset>
+        </div>
+        <button type="submit" class="custom-button">START QUIZ</button>
+      </form>
+    </main>
     <!-- END_MAIN -->
 
     <!-- BEGIN_FOOTER -->
