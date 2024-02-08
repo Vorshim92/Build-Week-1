@@ -112,6 +112,56 @@ async function fetchQuestions(amount, indexDifficulty) {
   }
 }
 
+const benchmarkPage = function () {
+  const body = document.body;
+  body.innerHTML = ""; // reset del contenuto del body e successivo innerHTML con la nuova struttura.
+  body.innerHTML = `<!-- BEGIN_HEADER -->
+  <header>
+    <div>
+      <img src="./assets/img/epicode_logo.png" alt="" />
+    </div>
+    <div class="time-container">
+      <div class="c-countdown-wrapper">
+        <canvas id="chart"></canvas>
+      </div>
+      <div class="time">
+        <p>SECONDS</p>
+        <div id="seconds-remaining"></div>
+        <p>REMAINING</p>
+      </div>
+    </div>
+  </header>
+  <!-- END_HEADER -->
+
+  <!-- BEGIN_MAIN -->
+  <main>
+    <div class="question-container">
+      <h1 class="question-style"></h1>
+    </div>
+    <div class="answers-container"></div>
+  </main>
+  <!-- END_MAIN -->
+
+  <!-- BEGIN_FOOTER -->
+  <footer>
+    <div class="question-counter-container">
+      <p>QUESTION</p>
+      <p class="question-number"></p>
+      <p>/ 10</p>
+    </div>
+  </footer>
+  <!-- END_FOOTER -->
+
+  <!-- BEGIN_SCRIPT -->
+  <script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
+"></script>
+  <script src="./assets/js/index.js"></script>
+  <!-- END_SCRIPT -->`;
+
+  init();
+};
+
 // FUNZIONE CHE GENERA AD OGNI GIRO UNA DOMANDA CASUALE E LE RELATIVE RISPOSTE NEI PULSANTI
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
@@ -352,8 +402,4 @@ const rateUs = () => {
   });
 };
 
-window.onload = function () {
-  fetchQuestions(amountQuestions, difficulty);
-
-  init();
-};
+window.onload = function () {};
