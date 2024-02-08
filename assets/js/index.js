@@ -242,6 +242,7 @@ function drawPieChart(value, maxValue) {
       cutout: "75%",
       borderWidth: 0,
       hoverBorderWidth: 2,
+
       // responsive: true,
       // onResize: handleResize,
       // maintainAspectRatio: false,
@@ -286,6 +287,7 @@ const countdownTimer = () => {
       clearInterval(interval);
       resultPage();
     } else if (timeCounter === 60) {
+      clearInterval(interval);
       questionFromArray();
       restartTimer();
     }
@@ -322,7 +324,7 @@ const buttonClick = () => {
         questionFromArray();
         restartTimer();
       }
-    }, 500);
+    }, 1000);
 
     // Rimuovi l'event listener da tutti i pulsanti
     buttons.forEach((button) => {
