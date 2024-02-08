@@ -49,12 +49,12 @@ const submitRating = () => {
   const comment = document.getElementById("input-text");
   formRating.addEventListener("submit", function (e) {
     // pushare nell'array feedback un oggetto contenente , rating, commento
-    console.log(comment.value);
-    console.log(rating);
+
     let obj = { rate: `${rating}`, comment: `${comment.value}` };
-    console.log(obj);
+
     feedback.push(obj);
-    console.log(feedback);
+
+    window.location.href = "../../index.html";
     e.preventDefault();
   });
 };
