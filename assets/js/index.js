@@ -1,86 +1,90 @@
-const questions = [
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "What does CPU stand for?",
-    correct_answer: "Central Processing Unit",
-    incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question:
-      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
-    correct_answer: "Final",
-    incorrect_answers: ["Static", "Private", "Public"],
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question: "The logo for Snapchat is a Bell.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question: "Pointers were not used in the original C programming language; they were added later on in C++.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "What is the most preferred image format used for logos in the Wikimedia database?",
-    correct_answer: ".svg",
-    incorrect_answers: [".png", ".jpeg", ".gif"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "In web design, what does CSS stand for?",
-    correct_answer: "Cascading Style Sheet",
-    incorrect_answers: ["Counter Strike: Source", "Corrective Style Sheet", "Computer Style Sheet"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "What is the code name for the mobile operating system Android 7.0?",
-    correct_answer: "Nougat",
-    incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "On Twitter, what is the character limit for a Tweet?",
-    correct_answer: "140",
-    incorrect_answers: ["120", "160", "100"],
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question: "Linux was first created as an alternative to Windows XP.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "Which programming language shares its name with an island in Indonesia?",
-    correct_answer: "Java",
-    incorrect_answers: ["Python", "C", "Jakarta"],
-  },
-];
+// const questions = [
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question: "What does CPU stand for?",
+//     correct_answer: "Central Processing Unit",
+//     incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question:
+//       "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
+//     correct_answer: "Final",
+//     incorrect_answers: ["Static", "Private", "Public"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "boolean",
+//     difficulty: "easy",
+//     question: "The logo for Snapchat is a Bell.",
+//     correct_answer: "False",
+//     incorrect_answers: ["True"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "boolean",
+//     difficulty: "easy",
+//     question: "Pointers were not used in the original C programming language; they were added later on in C++.",
+//     correct_answer: "False",
+//     incorrect_answers: ["True"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question: "What is the most preferred image format used for logos in the Wikimedia database?",
+//     correct_answer: ".svg",
+//     incorrect_answers: [".png", ".jpeg", ".gif"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question: "In web design, what does CSS stand for?",
+//     correct_answer: "Cascading Style Sheet",
+//     incorrect_answers: ["Counter Strike: Source", "Corrective Style Sheet", "Computer Style Sheet"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question: "What is the code name for the mobile operating system Android 7.0?",
+//     correct_answer: "Nougat",
+//     incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question: "On Twitter, what is the character limit for a Tweet?",
+//     correct_answer: "140",
+//     incorrect_answers: ["120", "160", "100"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "boolean",
+//     difficulty: "easy",
+//     question: "Linux was first created as an alternative to Windows XP.",
+//     correct_answer: "False",
+//     incorrect_answers: ["True"],
+//   },
+//   {
+//     category: "Science: Computers",
+//     type: "multiple",
+//     difficulty: "easy",
+//     question: "Which programming language shares its name with an island in Indonesia?",
+//     correct_answer: "Java",
+//     incorrect_answers: ["Python", "C", "Jakarta"],
+//   },
+// ];
+
+let difficulty = ["easy", "medium", "hard"];
+let amountQuestions;
+let arrayQuestions = [];
 
 // variabili globali
 let correctAnswersContainer = [];
@@ -89,6 +93,25 @@ let newChart;
 let timeCounter = 0;
 let incorrectAnswer = [];
 
+async function fetchQuestions(amount, indexDifficulty) {
+  try {
+    const response = await fetch(
+      `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty[indexDifficulty]}`
+    );
+    const data = await response.json();
+    const questions = data.results;
+
+    // Push dell'array di domande all'interno dell'array vuoto
+    arrayQuestions.push(...questions);
+
+    // Stampa dell'array con le domande aggiunte
+    console.log("Array con le domande:", arrayQuestions);
+    questionFromArray();
+  } catch (error) {
+    console.error("Errore durante il recupero delle domande:", error);
+  }
+}
+
 // FUNZIONE CHE GENERA AD OGNI GIRO UNA DOMANDA CASUALE E LE RELATIVE RISPOSTE NEI PULSANTI
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
@@ -96,14 +119,14 @@ const questionFromArray = () => {
   h1Question.innerText = "";
   let randQuest;
   do {
-    randQuest = Math.floor(Math.random() * questions.length); // genero un numero casuale da usare come index casuale per l'array delle domande
-  } while (usedQuestion.some((usedquestion) => usedquestion.question === questions[randQuest].question)); // il controllo per la condizione del while lo faccio tra le stringhe dei paramentri question degli oggetti dei due array
-  usedQuestion.push(questions[randQuest]); // pusho dentro l'array di controllo per le domande usate la domanda uscita
+    randQuest = Math.floor(Math.random() * arrayQuestions.length); // genero un numero casuale da usare come index casuale per l'array delle domande
+  } while (usedQuestion.some((usedquestion) => usedquestion.question === arrayQuestions[randQuest].question)); // il controllo per la condizione del while lo faccio tra le stringhe dei paramentri question degli oggetti dei due array
+  usedQuestion.push(arrayQuestions[randQuest]); // pusho dentro l'array di controllo per le domande usate la domanda uscita
 
-  h1Question.innerText = questions[randQuest].question;
+  h1Question.innerText = arrayQuestions[randQuest].question;
   const buttons = document.querySelector(".answers-container");
 
-  let totalAnswers = questions[randQuest].incorrect_answers.concat(questions[randQuest].correct_answer); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
+  let totalAnswers = arrayQuestions[randQuest].incorrect_answers.concat(arrayQuestions[randQuest].correct_answer); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
 
   buttons.innerHTML = ""; // resetto per sicurezza i pulsanti ad ogni iterazione
   for (let i = 0; i < totalAnswers.length; i++) {
@@ -189,7 +212,7 @@ const init = () => {
 const countdownTimer = () => {
   timeCounter = 0;
   interval = setInterval(() => {
-    if (usedQuestion.length === questions.length && timeCounter === 60) {
+    if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
       lastQuestion();
     } else if (timeCounter === 60) {
       questionFromArray();
@@ -210,7 +233,7 @@ function restartTimer() {
 
 // funzione importante che si attiva solo quando siamo all'ultima domanda, ferma l'intervallo e richiama la funzione che ci porta alla pagina nuova Result
 function lastQuestion() {
-  if (usedQuestion.length === questions.length) {
+  if (usedQuestion.length === arrayQuestions.length) {
     clearInterval(interval);
     resultPage();
   }
@@ -226,7 +249,7 @@ const buttonClick = () => {
       } else {
         lastQuestion();
       }
-      if (usedQuestion.length !== questions.length) {
+      if (usedQuestion.length !== arrayQuestions.length) {
         questionFromArray();
         restartTimer();
       }
@@ -245,7 +268,7 @@ const resultPage = function () {
   newChart.destroy(); // distruggo il vecchio newChart (grafico del timer) per poterlo ricreare successivamente per altro utilizzo
 
   // CREAZIONE ARRAY CON LE DOMANDE SBAGLIATE, FACENDO UN ARRAY CONFRONTANDO QUELLE CORRETTE E l'ARRAY MADRE DELLE DOMANDE
-  incorrectAnswer = questions.filter(
+  incorrectAnswer = arrayQuestions.filter(
     (obj2) => !correctAnswersContainer.some((obj1) => obj1.question === obj2.question)
   );
   console.log(incorrectAnswer);
@@ -330,6 +353,7 @@ const rateUs = () => {
 };
 
 window.onload = function () {
-  questionFromArray();
+  fetchQuestions(amountQuestions, difficulty);
+
   init();
 };

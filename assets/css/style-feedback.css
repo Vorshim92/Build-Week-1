@@ -74,10 +74,12 @@ main {
 
   cursor: pointer;
 }
-
-/* .stars svg path:hover {
+/* .div-star svg path:hover {
   fill: #00ffff;
 } */
+#stars path {
+  fill: #00ffff;
+}
 
 /* TEXT2 ELEMENTS */
 .text2 {

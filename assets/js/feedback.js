@@ -17,21 +17,23 @@ const clickStar = () => {
 
   allStar.forEach((star, index) => {
     star.addEventListener("mouseenter", function (e) {
-      for (let i = index - 1; i < allStar.length; i--) {
+      for (let i = 0; i <= index - 1; i++) {
         allStar[i].querySelector("svg > path").setAttribute("fill", "#395c5c");
+        allStar[index].querySelector("svg > path").setAttribute("fill", "#00ffff");
       }
     });
     star.addEventListener("mouseleave", function (e) {
-      for (let i = index - 1; i < allStar.length; i--) {
+      for (let i = 0; i <= index - 1; i++) {
         allStar[i].querySelector("svg > path").setAttribute("fill", "#080c29");
+        allStar[index].querySelector("svg > path").setAttribute("fill", "#080c29");
       }
     });
     star.addEventListener("click", function (e) {
       let rating = 0;
       for (let i = 0; i <= index; i++) {
-        allStar[i].querySelector("svg > path").setAttribute("fill", "#00FFFF");
+        allStar[i].querySelector("svg").setAttribute("id", "stars");
         for (let j = index + 1; j < allStar.length; j++) {
-          allStar[j].querySelector("svg > path").setAttribute("fill", "#080c29");
+          allStar[j].querySelector("svg").removeAttribute("id");
         }
       }
 
