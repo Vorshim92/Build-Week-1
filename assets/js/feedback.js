@@ -1,6 +1,6 @@
 // variabili globali
 let feedback = [];
-let rating;
+let rating = 0;
 // FUNZIONE PER GENERARE I DIV CON DENTRO LE STELLE .SVG
 const starsRating = () => {
   const divStar = document.querySelector(".stars");
