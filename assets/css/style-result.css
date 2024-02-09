@@ -164,7 +164,7 @@ p {
 /* BOTTONE */
 .button {
   display: inline-block;
-  margin: 5rem auto;
+  margin-top: 5rem;
 }
 
 .border-button {
