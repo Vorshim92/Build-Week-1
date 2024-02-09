@@ -35,7 +35,6 @@ main {
   margin-top: 8rem;
   width: 100%;
   display: block;
-  margin-inline: 11rem;
   text-align: center;
 }
 /* TEXT ELEMENTS */
@@ -67,14 +66,13 @@ main {
 
 .div-star {
   display: inline-block;
-  height: 60px;
 }
 
 .stars svg {
-  margin-inline: 0.5rem;
+  margin-inline: 1rem;
   display: inline-block;
-  height: 60px;
-  width: 60px;
+  height: auto;
+  width: 85px;
 
   cursor: pointer;
 }
@@ -98,7 +96,7 @@ main {
 /* INPUT ELEMENTS */
 
 .comment input {
-  width: 60%;
+  width: 80%;
   margin-block: 2rem;
   background: none;
   border: none;
@@ -167,7 +165,7 @@ footer {
   text-align: center;
   font-size: 1.2rem;
   color: rgba(250, 250, 250, 0.5);
-  margin-top: 20rem;
+  margin-top: 16rem;
 }
 footer p {
   margin-top: 0.5rem;
