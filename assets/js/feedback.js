@@ -62,7 +62,7 @@ const feedbackResult = (feedbackSubmitted) => {
   const body = document.body;
   body.innerHTML = "";
   body.innerHTML = `<header>
-  <div class="logo"><img src="./assets/img/epicode_logo.png" alt="Epicode logo" /></div>
+  <div class="logo"><a href="https://epicode.com/"><img src="./assets/img/epicode_logo.png" alt="Epicode logo" /></a></div>
 </header>
 <main>
   <div id="fb-container">
