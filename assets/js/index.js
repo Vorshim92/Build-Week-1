@@ -1,22 +1,18 @@
-let difficulty = ["easy", "medium", "hard"];
-let indexDifficulty;
-let amountQuestions;
-let arrayQuestions = [];
-
-// variabili globali
-let correctAnswersContainer = [];
-let usedQuestion = [];
+// variabili globali:
 let newChart;
+let arrayQuestions = [];
+let usedQuestion = [];
 let timeCounter = 0;
-let incorrectAnswer = [];
+let correctAnswersContainer = [];
+let incorrectAnswerContainer = [];
 
 const formQuestions = () => {
   const questionForm = document.getElementById("pre-questionary");
   questionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    indexDifficulty = document.querySelector("#diff-container > div > input:checked").value;
-    amountQuestions = document.querySelector("#numQuest-container > div > input:checked").value;
+    let indexDifficulty = document.querySelector("#diff-container > div > input:checked").value;
+    let amountQuestions = document.querySelector("#numQuest-container > div > input:checked").value;
     fetchQuestions(amountQuestions, indexDifficulty);
   });
 
@@ -24,6 +20,7 @@ const formQuestions = () => {
 };
 
 async function fetchQuestions(amount, index) {
+  let difficulty = ["easy", "medium", "hard"];
   const response = await fetch(
     `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty[index]}`
   );
@@ -87,20 +84,22 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 const questionFromArray = () => {
   const h1Question = document.querySelector(".question-style");
 
-  h1Question.innerText = "";
+  // randomizzazione dell'array delle domande
   let randQuest;
   do {
     randQuest = Math.floor(Math.random() * arrayQuestions.length); // genero un numero casuale da usare come index casuale per l'array delle domande
-  } while (usedQuestion.some((usedquestion) => usedquestion.question === arrayQuestions[randQuest].question)); // il controllo per la condizione del while lo faccio tra le stringhe dei paramentri question degli oggetti dei due array
+  } while (usedQuestion.some((usedquestion) => arrayQuestions[randQuest].question === usedquestion.question)); // il controllo per la condizione del while lo faccio tra le stringhe dei paramentri question degli oggetti dei due array
   usedQuestion.push(arrayQuestions[randQuest]); // pusho dentro l'array di controllo per le domande usate la domanda uscita
 
+  h1Question.innerText = "";
+  // inserimento della question con fix CARATTERI HTML
   h1Question.innerText = arrayQuestions[randQuest].question
     .replace(/&#039;/g, "'")
     .replace(/&quot;/g, `"`)
     .replace(/&gt;/g, `>`)
     .replace(/&lt;/g, `<`);
-  const buttons = document.querySelector(".answers-container");
 
+  const buttons = document.querySelector(".answers-container");
   // let totalAnswers = arrayQuestions[randQuest].incorrect_answers.concat(arrayQuestions[randQuest].correct_answer); // creo un ARRAY unico con le Risposte Totali, sia incorrect che correct
   let totalAnswers = arrayQuestions[randQuest].incorrect_answers
     .concat(arrayQuestions[randQuest].correct_answer)
@@ -140,6 +139,22 @@ const questionFromArray = () => {
 //   chart.resize();
 // };
 
+// esperimento testo integrato nel chart da rivedere
+// const doughnutLabel = {
+//   id: "doughnutLabel",
+//   beforeDatasetsDraw(chart, args, pluginOptions) {
+//     const { ctx, data } = chart;
+//     ctx.save();
+//     const xCoor = chart.getDatasetMeta(0).data[0].x;
+//     const yCoor = chart.getDatasetMeta(0).data[0].y;
+//     ctx.font = "bold 30px sans-serif";
+//     ctx.fillStyle = "rgba(0, 255, 255, 1)";
+//     ctx.textBaseline = middle;
+//     ctx.textAlign = "center";
+//     ctx.fillText("texttexttexttexttexttexttexttexttext", xCoor, yCoor);
+//   },
+// };
+
 //funzione per creare il grafico doughnut
 function drawPieChart(value, maxValue) {
   const ctx = document.getElementById("chart").getContext("2d");
@@ -165,29 +180,29 @@ function drawPieChart(value, maxValue) {
       tooltips: {
         enabled: false,
       },
-      // plugins: {
-      //   datalabels: {
-      //     backgroundColor: function (context) {
-      //       return context.dataset.backgroundColor;
-      //     },
-      //     display: function (context) {
-      //       var dataset = context.dataset;
-      //       var value = dataset.data[context.dataIndex];
-      //       return value > 0;
-      //     },
-      //     color: "white",
+      // plugins: [doughnutLabel],
+
+      // datalabels: {
+      //   backgroundColor: function (context) {
+      //     return context.dataset.backgroundColor;
       //   },
+      //   display: function (context) {
+      //     var dataset = context.dataset;
+      //     var value = dataset.data[context.dataIndex];
+      //     return value > 0;
+      //   },
+      //   color: "white",
       // },
     },
   });
 }
 
 // Funzione per reimposta il contatore del grafico ad ogni giro di counter
-function updateChart(chart) {
-  chart.data.datasets[0].data[0] = 60 - timeCounter;
-  chart.data.datasets[0].data[1] = timeCounter;
+function updateChart() {
+  newChart.data.datasets[0].data[0] = 60 - timeCounter;
+  newChart.data.datasets[0].data[1] = timeCounter;
 
-  chart.update();
+  newChart.update();
 }
 // funzione per inizializzare il grafico a torta all'avvio, compreso del setInterval
 const init = () => {
@@ -205,7 +220,7 @@ const countdownTimer = () => {
     } else if (timeCounter === 60) {
       clearInterval(interval);
       questionFromArray();
-      restartTimer();
+      countdownTimer();
     }
     timeCounter += 1;
     updateChart(newChart);
@@ -215,16 +230,15 @@ const countdownTimer = () => {
 };
 
 // funzione per restartare il timer
-function restartTimer() {
-  countdownTimer();
-}
 
 // funzione importante che si attiva solo quando siamo all'ultima domanda, ferma l'intervallo e richiama la funzione che ci porta alla pagina nuova Result
 
 // funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
+
   const handleClick = function (e) {
+    //FUNZIONE DI CALLBACK PER EVENT LISTENER
     clearInterval(interval);
     if (this.innerText === usedQuestion[usedQuestion.length - 1].correct_answer) {
       correctAnswersContainer.push(usedQuestion[usedQuestion.length - 1]);
@@ -237,7 +251,7 @@ const buttonClick = () => {
         resultPage();
       } else {
         questionFromArray();
-        restartTimer();
+        countdownTimer();
       }
     }, 1000);
 
@@ -269,7 +283,7 @@ const resultPage = function () {
   // newChart.destroy(); // distruggo il vecchio newChart (grafico del timer) per poterlo ricreare successivamente per altro utilizzo
 
   // CREAZIONE ARRAY CON LE DOMANDE SBAGLIATE, FACENDO UN ARRAY CONFRONTANDO QUELLE CORRETTE E l'ARRAY MADRE DELLE DOMANDE
-  incorrectAnswer = arrayQuestions.filter(
+  incorrectAnswerContainer = arrayQuestions.filter(
     (obj2) => !correctAnswersContainer.some((obj1) => obj1.question === obj2.question)
   );
 
@@ -329,7 +343,7 @@ const resultPage = function () {
     <div class="wrong">
       <h3 class="cor-wro1">Wrong</h3>
       <h3 class="cor-wro2">${100 - percentuali}%</h3>
-      <p class="domande"> ${usedQuestion.length - correctAnswersContainer.length}/${usedQuestion.length} questions</p>
+      <p class="domande"> ${incorrectAnswerContainer.length}/${usedQuestion.length} questions</p>
     </div>
   </section>
   <div class="button"><button id="but" class="border-button">RATE US</button></div>
@@ -339,7 +353,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
   rateUs(); // richiamo la funzione per il pulsante Rate US
-  drawPieChart(incorrectAnswer.length, arrayQuestions.length); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
+  drawPieChart(incorrectAnswerContainer.length, arrayQuestions.length); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
   newChart.data.datasets[0].backgroundColor[0] = "rgba(194, 18, 141, 1)";
   newChart.data.datasets[0].backgroundColor[1] = "rgba(0, 255, 255, 1)";
 };
