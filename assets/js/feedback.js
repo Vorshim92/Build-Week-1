@@ -58,6 +58,12 @@ const submitRating = () => {
   });
 };
 
+const feedbackResult = () => {
+  const body = document.body;
+  body.innerHTML = "";
+  body.innerHTML = "";
+};
+
 window.onload = function () {
   starsRating();
   submitRating();

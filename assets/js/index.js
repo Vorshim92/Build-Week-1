@@ -51,7 +51,7 @@ const benchmarkPage = function () {
       </div>
       <div class="time">
         <p>SECONDS</p>
-        <div id="seconds-remaining"></div>
+        <div id="seconds-remaining">60</div>
         <p>REMAINING</p>
       </div>
     </div>
@@ -165,19 +165,19 @@ function drawPieChart(value, maxValue) {
       tooltips: {
         enabled: false,
       },
-      plugins: {
-        datalabels: {
-          backgroundColor: function (context) {
-            return context.dataset.backgroundColor;
-          },
-          display: function (context) {
-            var dataset = context.dataset;
-            var value = dataset.data[context.dataIndex];
-            return value > 0;
-          },
-          color: "white",
-        },
-      },
+      // plugins: {
+      //   datalabels: {
+      //     backgroundColor: function (context) {
+      //       return context.dataset.backgroundColor;
+      //     },
+      //     display: function (context) {
+      //       var dataset = context.dataset;
+      //       var value = dataset.data[context.dataIndex];
+      //       return value > 0;
+      //     },
+      //     color: "white",
+      //   },
+      // },
     },
   });
 }
@@ -191,7 +191,7 @@ function updateChart(chart) {
 }
 // funzione per inizializzare il grafico a torta all'avvio, compreso del setInterval
 const init = () => {
-  drawPieChart(0, 60);
+  drawPieChart(0, 0);
   countdownTimer();
 };
 
@@ -234,7 +234,6 @@ const buttonClick = () => {
     }
     setTimeout(() => {
       if (usedQuestion.length === arrayQuestions.length) {
-        clearInterval(interval);
         resultPage();
       } else {
         questionFromArray();
@@ -267,7 +266,7 @@ const variableNumOfPage = function () {
 
 //SUPER RESET DELLA PAGINA PER PASSARE A QUELLA DEI RISULTATI
 const resultPage = function () {
-  newChart.destroy(); // distruggo il vecchio newChart (grafico del timer) per poterlo ricreare successivamente per altro utilizzo
+  // newChart.destroy(); // distruggo il vecchio newChart (grafico del timer) per poterlo ricreare successivamente per altro utilizzo
 
   // CREAZIONE ARRAY CON LE DOMANDE SBAGLIATE, FACENDO UN ARRAY CONFRONTANDO QUELLE CORRETTE E l'ARRAY MADRE DELLE DOMANDE
   incorrectAnswer = arrayQuestions.filter(
