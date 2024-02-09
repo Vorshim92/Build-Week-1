@@ -68,6 +68,7 @@ const benchmarkPage = function () {
   <footer>
     <div class="question-counter-container">
     </div>
+    <div class="button"><button id="next-btn" class="border-button">PROSSIMA DOMANDA</button></div>
   </footer>
   <!-- END_FOOTER -->
 
@@ -78,6 +79,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
   <script src="./assets/js/index.js"></script>
   <!-- END_SCRIPT -->`;
   questionFromArray();
+  nextButton();
 };
 
 // FUNZIONE CHE GENERA AD OGNI GIRO UNA DOMANDA CASUALE E LE RELATIVE RISPOSTE NEI PULSANTI
@@ -131,6 +133,7 @@ const questionFromArray = () => {
   });
 
   buttonClick(); // richiamo la funzione alla riga 212 per aggiungere ai pulsati l'Event Listener del click
+
   variableNumOfPage(); // richiamo la funzione alla riga 231 ad ogni giro di domanda per aggiornare il numero della question nel footer
 };
 
@@ -263,6 +266,19 @@ const buttonClick = () => {
 
   buttons.forEach((button) => {
     button.addEventListener("click", handleClick);
+  });
+};
+
+const nextButton = () => {
+  const btnNext = document.getElementById("next-btn");
+  btnNext.addEventListener("click", () => {
+    clearInterval(interval);
+    if (usedQuestion.length === arrayQuestions.length) {
+      resultPage();
+    } else {
+      questionFromArray();
+      countdownTimer();
+    }
   });
 };
 
