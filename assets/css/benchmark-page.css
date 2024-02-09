@@ -1,0 +1,223 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  padding: 5%;
+}
+/*-----------------HEADER----------------*/
+header {
+  margin-bottom: 100px;
+}
+header img {
+  width: 15%;
+}
+header .time-container {
+  left: 85%;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  color: white;
+}
+
+header .time-container .time {
+  font-size: 0.9rem;
+  bottom: 151px;
+  position: relative;
+  text-align: center;
+  line-height: 2.3rem;
+}
+
+header .time-container .time p {
+  font-family: "Inter";
+}
+
+#seconds-remaining {
+  font-size: 400%;
+  font-family: "Inter";
+}
+
+/*-----------------MAIN-----------------------*/
+main {
+  margin: auto;
+  width: 80%;
+}
+main h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+main h2 {
+  color: #cb2376;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+/* .c-countdown-wrapper {
+  max-width: 300px;
+  width: 100%;
+  margin: 20px auto;
+} */
+/*--------------QUESTION-----------------*/
+
+main .question-container {
+  text-align: center;
+  width: 100%;
+  margin: auto;
+}
+
+main .question-container .question-style {
+  font-family: "Outfit";
+  font-weight: 400;
+}
+
+/*-------------------ANSWERS--------------------*/
+
+main .answers-container {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+main .answers-container .answer {
+  font-family: "Inter";
+  border-color: #ffffff85;
+  color: white;
+  width: 25rem;
+  height: 5rem;
+  margin: 25px;
+  /* border: none; */
+  border-radius: 10rem;
+  /* background-color: transparent; */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  font-size: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+main .answers-container .answer:hover {
+  background-color: #d20093cc;
+}
+
+#correct {
+  background-color: #388750cb;
+}
+#incorrect {
+  background-color: #ff002687;
+}
+/*------------------FOOTER----------------*/
+
+footer {
+  width: 100%;
+}
+
+footer .question-counter-container {
+  width: 20%;
+  padding-top: 6rem;
+  text-align: center;
+  margin: auto;
+  color: white;
+  letter-spacing: 2px;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: larger;
+}
+
+footer .question-counter-container p {
+  display: inline-block;
+}
+
+footer .question-counter-container p:last-child {
+  color: #d20094;
+}
+
+/* START FORM ELEMENTS */
+
+form-container {
+  max-width: 80%;
+  text-align: center;
+}
+
+#diff-container,
+#numQuest-container {
+  text-align: center;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8rem;
+}
+
+label {
+  font-family: "Inter", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  width: 100%;
+  color: #cb2376;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  bottom: 1rem;
+}
+
+label:hover {
+  color: white;
+  /* border: 1px solid white; */
+}
+
+input:checked ~ label {
+  color: #ffffff;
+  font-size: 3rem;
+}
+
+legend {
+  padding: 1rem;
+}
+
+fieldset input {
+  display: none;
+}
+
+fieldset {
+  border-radius: 15px;
+}
+
+.field-div {
+  display: inline-block;
+  margin-inline: 3rem;
+}
+
+form {
+  margin-top: 10rem;
+}
+
+form button {
+  background-color: #00ffff;
+  width: 18rem;
+  height: 6rem;
+  margin: 0 auto;
+  display: block;
+  box-shadow: 0px 0px 45px 3px #00ffff;
+  font-weight: bold;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+form button:hover {
+  color: white;
+}

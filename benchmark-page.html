@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="newHead">
+    <!-- META_TAGS -->
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="DESCRIZIONE" />
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FONTAWESOME 5.15.4 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/benchmark-page.css" />
+
+    <!-- WEBPAGE_NAME -->
+    <title>BENCHMARK</title>
+  </head>
+  <body>
+    <!-- BEGIN_HEADER -->
+    <header>
+      <div>
+        <img src="./assets/img/epicode_logo.png" alt="" />
+      </div>
+    </header>
+    <!-- END_HEADER -->
+
+    <!-- BEGIN_MAIN -->
+    <main>
+      <form id="pre-questionary">
+        <div id="form-container">
+          <fieldset id="diff-container">
+            <legend>DIFFICULTY</legend>
+
+            <div class="field-div">
+              <input type="radio" id="easy" name="diff" value="0" />
+              <label for="easy">Easy</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="medium" name="diff" value="1" />
+              <label for="medium">Medium</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="hard" name="diff" value="2" />
+              <label for="hard">Hard</label>
+            </div>
+          </fieldset>
+
+          <fieldset id="numQuest-container">
+            <legend>NUMBER OF QUESTIONS</legend>
+
+            <div class="field-div">
+              <input type="radio" id="10" name="num" value="10" />
+              <label for="10">10</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="20" name="num" value="20" />
+              <label for="20">20</label>
+            </div>
+
+            <div class="field-div">
+              <input type="radio" id="30" name="num" value="30" />
+              <label for="30">30</label>
+            </div>
+          </fieldset>
+        </div>
+        <button type="submit" class="custom-button">START QUIZ</button>
+      </form>
+    </main>
+    <!-- END_MAIN -->
+
+    <!-- BEGIN_FOOTER -->
+    <footer></footer>
+    <!-- END_FOOTER -->
+
+    <!-- BEGIN_SCRIPT -->
+    <script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
+"></script>
+    <script src="./assets/js/index.js"></script>
+    <!-- END_SCRIPT -->
+  </body>
+</html>
