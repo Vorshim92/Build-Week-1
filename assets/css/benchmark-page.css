@@ -224,7 +224,7 @@ form button:hover {
 
 /* BOTTONE */
 .button {
-  display: inline-block;
+  display: block;
   margin-top: 5rem;
 }
 
