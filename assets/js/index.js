@@ -217,10 +217,12 @@ const countdownTimer = () => {
     if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
       clearInterval(interval);
       resultPage();
+      return;
     } else if (timeCounter === 60) {
       clearInterval(interval);
       questionFromArray();
       countdownTimer();
+      return;
     }
     timeCounter += 1;
     updateChart(newChart);
