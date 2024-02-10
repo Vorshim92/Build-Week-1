@@ -73,6 +73,7 @@ section {
 
 .check-rule {
   width: 100%;
+<<<<<<< HEAD
 }
 .checkbox-div {
   display: inline-block;
@@ -96,22 +97,57 @@ section {
   -ms-user-select: none;
   user-select: none;
   vertical-align: middle;
+=======
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* .checkbox-div {
+  display: inline-block;
+  width: 65%;
+} */
+
+.checkbutton-div {
+  display: flex;
+  /* vertical-align: middle; */
+  /* margin-top: auto; */
+  width: 25%;
+  margin-left: auto;
+  /* align-items: center; */
+  flex-direction: column;
+  justify-content: center;
+}
+.checkbox-wrapper {
+  width: 75%;
+  display: flex;
+  align-items: center;
+>>>>>>> develop-stefano
 }
 
 /* Nascondo il checkbox di base del browser */
 .checkbox-wrapper input {
   display: none;
+<<<<<<< HEAD
 
   vertical-align: middle;
+=======
+>>>>>>> develop-stefano
 }
 
 /* creo il mio checkbox */
 .checkbox-wrapper .checkmark {
+<<<<<<< HEAD
   display: inline-block;
   height: 30px;
   width: 30px;
   border: 3px solid white;
   vertical-align: middle;
+=======
+  display: flex;
+  min-width: 30px;
+  height: 30px;
+  border: 3px solid white;
+>>>>>>> develop-stefano
 }
 
 .checkbox-wrapper:hover input ~ .checkmark {
@@ -123,22 +159,35 @@ section {
 }
 
 .check-rule p {
+<<<<<<< HEAD
   display: inline-block;
   font-weight: 700;
   padding-left: 10px;
+=======
+  font-weight: 700;
+  margin-inline: 20px;
+>>>>>>> develop-stefano
 }
 
 .check-rule button {
   background-color: #00ffff;
   width: 18rem;
   height: 6rem;
+<<<<<<< HEAD
   margin-left: 20rem;
   display: inline-block;
+=======
+
+>>>>>>> develop-stefano
   box-shadow: 0px 0px 45px 3px #00ffff;
   font-weight: bold;
   font-size: 28px;
   border: none;
+<<<<<<< HEAD
   /* margin-left: 200px; */
+=======
+
+>>>>>>> develop-stefano
   cursor: pointer;
 }
 
