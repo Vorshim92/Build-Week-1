@@ -241,11 +241,11 @@ const buttonClick = () => {
   //FUNZIONE DI CALLBACK PER EVENT LISTENER
   const handleClick = function (e) {
     buttons.forEach((otherButton) => {
-      if (otherButton !== this && otherButton.style.backgroundColor === "orange") {
+      if (otherButton !== this && otherButton.style.backgroundColor === "aqua") {
         otherButton.style.backgroundColor = "";
       }
     });
-    this.style.backgroundColor = this.style.backgroundColor === "orange" ? "" : "orange";
+    this.style.backgroundColor = this.style.backgroundColor === "aqua" ? "" : "aqua";
 
     // Rimuovi l'event listener da tutti i pulsanti
     // buttons.forEach((button) => {
