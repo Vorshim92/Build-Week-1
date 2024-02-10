@@ -122,6 +122,7 @@ section {
 .check-rule p {
   font-weight: 700;
   margin-inline: 20px;
+  cursor: pointer;
 }
 
 .check-rule button {
