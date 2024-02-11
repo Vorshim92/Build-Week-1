@@ -293,7 +293,7 @@ const nextButton = () => {
       }
       this.setAttribute("id", "");
       btnNext.addEventListener("click", nextEvent);
-    }, 3000);
+    }, 1000);
   });
 };
 
