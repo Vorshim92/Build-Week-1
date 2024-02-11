@@ -4,7 +4,8 @@ let arrayQuestions = [];
 let usedQuestion = [];
 let timeCounter = 0;
 let correctAnswersContainer = [];
-let incorrectAnswerContainer = [];
+let incorrectAnswersContainer = [];
+let answersContainer = [];
 
 const formQuestions = () => {
   const questionForm = document.getElementById("pre-questionary");
@@ -68,6 +69,7 @@ const benchmarkPage = function () {
   <footer>
     <div class="question-counter-container">
     </div>
+    <div class="button"><button id="next-btn" class="border-button">PROSSIMA DOMANDA</button></div>
   </footer>
   <!-- END_FOOTER -->
 
@@ -78,6 +80,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
   <script src="./assets/js/index.js"></script>
   <!-- END_SCRIPT -->`;
   questionFromArray();
+  nextButton();
 };
 
 // FUNZIONE CHE GENERA AD OGNI GIRO UNA DOMANDA CASUALE E LE RELATIVE RISPOSTE NEI PULSANTI
@@ -217,10 +220,12 @@ const countdownTimer = () => {
     if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
       clearInterval(interval);
       resultPage();
+      return;
     } else if (timeCounter === 60) {
       clearInterval(interval);
       questionFromArray();
       countdownTimer();
+      return;
     }
     timeCounter += 1;
     updateChart(newChart);
@@ -229,23 +234,45 @@ const countdownTimer = () => {
   }, 1000);
 };
 
-// funzione per restartare il timer
-
-// funzione importante che si attiva solo quando siamo all'ultima domanda, ferma l'intervallo e richiama la funzione che ci porta alla pagina nuova Result
-
+let answer = "";
 // funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
-
+  //FUNZIONE DI CALLBACK PER EVENT LISTENER
   const handleClick = function (e) {
-    //FUNZIONE DI CALLBACK PER EVENT LISTENER
+    buttons.forEach((otherButton) => {
+      if (otherButton !== this && otherButton.style.backgroundColor === "aqua") {
+        otherButton.style.backgroundColor = "";
+      }
+    });
+    this.style.backgroundColor = this.style.backgroundColor === "aqua" ? "" : "aqua";
+
+    // Rimuovi l'event listener da tutti i pulsanti
+    // buttons.forEach((button) => {
+    //   button.removeEventListener("click", handleClick);
+    // });
+    answer = "";
+    answer = this.innerText;
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", handleClick);
+  });
+};
+
+const nextButton = () => {
+  const btnNext = document.getElementById("next-btn");
+  btnNext.addEventListener("click", function nextEvent(e) {
+    // Rimuovi l'event listener dal pulsante
+    btnNext.removeEventListener("click", nextEvent);
     clearInterval(interval);
-    if (this.innerText === usedQuestion[usedQuestion.length - 1].correct_answer) {
+    if (answer === usedQuestion[usedQuestion.length - 1].correct_answer) {
       correctAnswersContainer.push(usedQuestion[usedQuestion.length - 1]);
       this.setAttribute("id", "correct");
     } else {
       this.setAttribute("id", "incorrect");
     }
+    answersContainer.push(answer);
     setTimeout(() => {
       if (usedQuestion.length === arrayQuestions.length) {
         resultPage();
@@ -253,16 +280,9 @@ const buttonClick = () => {
         questionFromArray();
         countdownTimer();
       }
+      this.setAttribute("id", "");
+      btnNext.addEventListener("click", nextEvent);
     }, 1000);
-
-    // Rimuovi l'event listener da tutti i pulsanti
-    buttons.forEach((button) => {
-      button.removeEventListener("click", handleClick);
-    });
-  };
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", handleClick);
   });
 };
 
@@ -283,7 +303,7 @@ const resultPage = function () {
   // newChart.destroy(); // distruggo il vecchio newChart (grafico del timer) per poterlo ricreare successivamente per altro utilizzo
 
   // CREAZIONE ARRAY CON LE DOMANDE SBAGLIATE, FACENDO UN ARRAY CONFRONTANDO QUELLE CORRETTE E l'ARRAY MADRE DELLE DOMANDE
-  incorrectAnswerContainer = arrayQuestions.filter(
+  incorrectAnswersContainer = arrayQuestions.filter(
     (obj2) => !correctAnswersContainer.some((obj1) => obj1.question === obj2.question)
   );
 
@@ -325,7 +345,7 @@ const resultPage = function () {
     <div class="correct">
       <h3 class="cor-wro1">Correct</h3>
       <h3 class="cor-wro2">${percentuali}%</h3>
-      <p class="domande">${correctAnswersContainer.length}/${usedQuestion.length} questions</p>
+      <p class="domande">${correctAnswersContainer.length}/${arrayQuestions.length} questions</p>
     </div>
     <div class="inblock-circle">
     <canvas id="chart"></canvas>
@@ -343,7 +363,7 @@ const resultPage = function () {
     <div class="wrong">
       <h3 class="cor-wro1">Wrong</h3>
       <h3 class="cor-wro2">${100 - percentuali}%</h3>
-      <p class="domande"> ${incorrectAnswerContainer.length}/${usedQuestion.length} questions</p>
+      <p class="domande"> ${incorrectAnswersContainer.length}/${arrayQuestions.length} questions</p>
     </div>
   </section>
   <div class="button"><button id="but" class="border-button">RATE US</button></div>
@@ -353,7 +373,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
   rateUs(); // richiamo la funzione per il pulsante Rate US
-  drawPieChart(incorrectAnswerContainer.length, arrayQuestions.length); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
+  drawPieChart(incorrectAnswersContainer.length, arrayQuestions.length); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
   newChart.data.datasets[0].backgroundColor[0] = "rgba(194, 18, 141, 1)";
   newChart.data.datasets[0].backgroundColor[1] = "rgba(0, 255, 255, 1)";
 };
