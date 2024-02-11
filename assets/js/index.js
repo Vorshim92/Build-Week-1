@@ -6,6 +6,7 @@ let timeCounter = 0;
 let correctAnswersContainer = [];
 let incorrectAnswersContainer = [];
 let answersContainer = [];
+let answer = "";
 
 const formQuestions = () => {
   const questionForm = document.getElementById("pre-questionary");
@@ -219,10 +220,13 @@ const countdownTimer = () => {
   interval = setInterval(() => {
     if (usedQuestion.length === arrayQuestions.length && timeCounter === 60) {
       clearInterval(interval);
+      answersContainer.push((answer = ""));
+
       resultPage();
       return;
     } else if (timeCounter === 60) {
       clearInterval(interval);
+      answersContainer.push((answer = ""));
       questionFromArray();
       countdownTimer();
       return;
@@ -234,27 +238,24 @@ const countdownTimer = () => {
   }, 1000);
 };
 
-let answer = "";
+//FUNZIONE DI CALLBACK PER EVENT LISTENER
+const handleClick = function () {
+  const buttons = document.querySelectorAll(".answers-container > button");
+
+  buttons.forEach((otherButton) => {
+    if (otherButton !== this) {
+      otherButton.style.backgroundColor = "";
+    }
+  });
+  this.style.backgroundColor = this.style.backgroundColor === "aqua" ? "" : "aqua";
+
+  answer = this.style.backgroundColor === "aqua" ? this.innerText : "";
+  console.log(answer);
+};
+
 // funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
-  //FUNZIONE DI CALLBACK PER EVENT LISTENER
-  const handleClick = function (e) {
-    buttons.forEach((otherButton) => {
-      if (otherButton !== this && otherButton.style.backgroundColor === "aqua") {
-        otherButton.style.backgroundColor = "";
-      }
-    });
-    this.style.backgroundColor = this.style.backgroundColor === "aqua" ? "" : "aqua";
-
-    // Rimuovi l'event listener da tutti i pulsanti
-    // buttons.forEach((button) => {
-    //   button.removeEventListener("click", handleClick);
-    // });
-    answer = "";
-    answer = this.innerText;
-  };
-
   buttons.forEach((button) => {
     button.addEventListener("click", handleClick);
   });
@@ -262,7 +263,15 @@ const buttonClick = () => {
 
 const nextButton = () => {
   const btnNext = document.getElementById("next-btn");
+
   btnNext.addEventListener("click", function nextEvent(e) {
+    // Rimuovi l'event listener da tutti i pulsanti
+    const buttons = document.querySelectorAll(".answers-container > button");
+
+    buttons.forEach((button) => {
+      button.removeEventListener("click", handleClick);
+    });
+
     // Rimuovi l'event listener dal pulsante
     btnNext.removeEventListener("click", nextEvent);
     clearInterval(interval);
@@ -273,16 +282,18 @@ const nextButton = () => {
       this.setAttribute("id", "incorrect");
     }
     answersContainer.push(answer);
+    answer = "";
     setTimeout(() => {
       if (usedQuestion.length === arrayQuestions.length) {
         resultPage();
+        return;
       } else {
         questionFromArray();
         countdownTimer();
       }
       this.setAttribute("id", "");
       btnNext.addEventListener("click", nextEvent);
-    }, 1000);
+    }, 3000);
   });
 };
 
