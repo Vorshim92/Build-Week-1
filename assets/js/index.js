@@ -377,7 +377,7 @@ const resultPage = function () {
     </div>
     </section>
     <div class="button"><button id="review" class="border-button">REVIEW</button></div>
-    <section class="section-review"></section>
+    <section class="section-review hidden"></section>
   <div class="button"><button id="but" class="border-button">RATE US</button></div>
 </main>
 <script src="
@@ -400,9 +400,12 @@ const rateUs = () => {
 };
 const review = () => {
   const btnReview = document.getElementById("review");
+  const reviewDiv = document.querySelector(".section-review");
+
   btnReview.addEventListener("click", function eventQuestions() {
     btnReview.removeEventListener("click", eventQuestions);
-    const reviewDiv = document.querySelector(".section-review");
+    reviewDiv.classList.toggle("hidden");
+
     for (let i = 0; i < arrayQuestions.length; i++) {
       reviewDiv.innerHTML += `<div class="question">
     <h2>Question ${i + 1}: ${arrayQuestions[i].question}</h2>
@@ -417,6 +420,7 @@ const review = () => {
         risposte[i].innerHTML += `<li class="answer"><span></span> ${totalAnswers[j]}</li>`;
       }
     }
+    btnReview.addEventListener("click", () => reviewDiv.classList.toggle("hidden"));
   });
 };
 

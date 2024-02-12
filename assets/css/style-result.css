@@ -201,3 +201,6 @@ p {
 
   /* Colore del testo al passaggio del mouse */
 }
+.hidden {
+  display: none;
+}
