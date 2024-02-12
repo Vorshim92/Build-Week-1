@@ -410,14 +410,17 @@ const review = () => {
       reviewDiv.innerHTML += `<div class="question">
     <h2>Question ${i + 1}: ${usedQuestion[i].question}</h2>
     <ul class="answers"></ul>
-    <p>Your answer: <span></span> ${answersContainer[i]}</p>
+    <p class="${answersContainer[i] === usedQuestion[i].correct_answer ? "correct-answer" : ""}">
+    <span>Your answer:</span> ${answersContainer[i]}</p>
     </div>`;
     }
+
     const risposte = document.querySelectorAll(".answers");
     for (let i = 0; i < usedQuestion.length; i++) {
       let totalAnswers = usedQuestion[i].incorrect_answers.concat(usedQuestion[i].correct_answer);
       for (let j = 0; j < totalAnswers.length; j++) {
-        risposte[i].innerHTML += `<li class="answer"><span></span> ${totalAnswers[j]}</li>`;
+        risposte[i].innerHTML += `<li class="answer${j === totalAnswers.length - 1 ? " last-answer" : ""}">
+        <span></span> ${totalAnswers[j]}</li>`;
       }
     }
     btnReview.addEventListener("click", () => reviewDiv.classList.toggle("hidden"));

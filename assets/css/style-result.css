@@ -204,3 +204,10 @@ p {
 .hidden {
   display: none;
 }
+.last-answer {
+  color: green;
+}
+.correct-answer {
+  color: green;
+  font-size: 1rem;
+}
