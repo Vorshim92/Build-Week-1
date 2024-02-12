@@ -250,7 +250,6 @@ const handleClick = function () {
   this.style.backgroundColor = this.style.backgroundColor === "aqua" ? "" : "aqua";
 
   answer = this.style.backgroundColor === "aqua" ? this.innerText : "";
-  console.log(answer);
 };
 
 // funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
@@ -376,7 +375,9 @@ const resultPage = function () {
       <h3 class="cor-wro2">${100 - percentuali}%</h3>
       <p class="domande"> ${incorrectAnswersContainer.length}/${arrayQuestions.length} questions</p>
     </div>
-  </section>
+    </section>
+    <div class="button"><button id="review" class="border-button">REVIEW</button></div>
+    <section class="section-review"></section>
   <div class="button"><button id="but" class="border-button">RATE US</button></div>
 </main>
 <script src="
@@ -384,6 +385,7 @@ https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js
 "></script>
     <script src="./assets/js/index.js"></script>`;
   rateUs(); // richiamo la funzione per il pulsante Rate US
+  review();
   drawPieChart(incorrectAnswersContainer.length, arrayQuestions.length); // nuovo Chart grafico per visualizzare i risultati, con nuovi valori e colori
   newChart.data.datasets[0].backgroundColor[0] = "rgba(194, 18, 141, 1)";
   newChart.data.datasets[0].backgroundColor[1] = "rgba(0, 255, 255, 1)";
@@ -394,6 +396,27 @@ const rateUs = () => {
   const btnRateUs = document.getElementById("but");
   btnRateUs.addEventListener("click", () => {
     window.location.href = "../../feedback.html";
+  });
+};
+const review = () => {
+  const btnReview = document.getElementById("review");
+  btnReview.addEventListener("click", function eventQuestions() {
+    btnReview.removeEventListener("click", eventQuestions);
+    const reviewDiv = document.querySelector(".section-review");
+    for (let i = 0; i < arrayQuestions.length; i++) {
+      reviewDiv.innerHTML += `<div class="question">
+    <h2>Question ${i + 1}: ${arrayQuestions[i].question}</h2>
+    <ul class="answers"></ul>
+    <p>Your answer: <span></span> ${answersContainer[i]}</p>
+    </div>`;
+    }
+    const risposte = document.querySelectorAll(".answers");
+    for (let i = 0; i < arrayQuestions.length; i++) {
+      let totalAnswers = arrayQuestions[i].incorrect_answers.concat(arrayQuestions[i].correct_answer);
+      for (let j = 0; j < totalAnswers.length; j++) {
+        risposte[i].innerHTML += `<li class="answer"><span></span> ${totalAnswers[j]}</li>`;
+      }
+    }
   });
 };
 
