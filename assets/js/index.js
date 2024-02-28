@@ -252,7 +252,7 @@ const handleClick = function () {
   answer = this.style.backgroundColor === "aqua" ? this.innerText : "";
 };
 
-// funzione che aggiunge gli eventlistener ai pulsanti delle risposte e fa diversi controlli e richiama alcune funzioni in base a determinate condizioni
+// funzione che aggiunge gli eventlistener ai pulsanti delle risposte
 const buttonClick = () => {
   const buttons = document.querySelectorAll(".answers-container > button");
   buttons.forEach((button) => {
@@ -271,7 +271,7 @@ const nextButton = () => {
       button.removeEventListener("click", handleClick);
     });
 
-    // Rimuovi l'event listener dal pulsante
+    // Rimuovi l'event listener dal pulsante Next
     btnNext.removeEventListener("click", nextEvent);
     clearInterval(interval);
     if (answer === usedQuestion[usedQuestion.length - 1].correct_answer) {
@@ -291,6 +291,7 @@ const nextButton = () => {
         countdownTimer();
       }
       this.setAttribute("id", "");
+      // Riaggiungo l'event listener dal pulsante Next (essendo un pulsante globale nel mio codice html, che nn viene generato ogni volta)
       btnNext.addEventListener("click", nextEvent);
     }, 1000);
   });
